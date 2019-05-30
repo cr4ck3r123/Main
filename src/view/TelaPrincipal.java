@@ -409,13 +409,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-        if(os == null){           
-        os = new TelaOrdemServico();
-            
-        }
-        os.show();
-        os.toFront();
-        os.requestFocus();
+      
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -474,7 +468,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItem5ActionPerformed
 
     private void jRadioButtonMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
-        // TODO add your handling code here:
+          if(os == null){           
+        os = new TelaOrdemServico();
+            
+        }
+        os.show();
+        os.toFront();
+        os.requestFocus();
     }//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
 
     private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed

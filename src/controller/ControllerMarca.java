@@ -27,7 +27,7 @@ public class ControllerMarca {
                 public  void listarMarca() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/listarMarcas";
+			String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/listarMarcas";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -53,7 +53,7 @@ public class ControllerMarca {
                 public int retornoid() throws Exception{
                     
                     String nome = cbMarca.getSelectedItem().toString();
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/marca/"+nome+"/";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/marca/"+nome+"/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                                       

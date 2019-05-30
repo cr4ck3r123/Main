@@ -29,7 +29,7 @@ public class ControllerUsuario {
 			int i = 0;
 			String login = dados.getLogin();
 			String senha = dados.getSenha();			
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/autenticar/"+login+"/"+senha;
+			String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/autenticar/"+login+"/"+senha;
 			HttpExemplo http = new HttpExemplo();
 		    
 		    String json = http.sendGet(chamada);	
@@ -60,7 +60,7 @@ public class ControllerUsuario {
                 public  void listarUsuario() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/listarUsuario";
+			String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/listarUsuario";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -101,7 +101,7 @@ public class ControllerUsuario {
                 //METODO PARA PEGAR DADOS POR ID
                 public Usuario dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/pesq/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/pesq/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -117,7 +117,7 @@ public class ControllerUsuario {
                 
                 //METODO DELETAR
                 public void deletarUsuario(int id) throws Exception{
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/delete/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/delete/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendDelete(chamada);
                     
@@ -128,7 +128,7 @@ public class ControllerUsuario {
                 //METODO PEGAR ID
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/idUsuario/";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/idUsuario/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -140,7 +140,7 @@ public class ControllerUsuario {
 		public String inserir(Usuario dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/add";
+			String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/add";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -175,7 +175,7 @@ public class ControllerUsuario {
                 public String editar(Usuario dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosUsuario/update/";
+			String chamada = "http://localhost:8081/WebService/rest/servicosUsuario/update/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						

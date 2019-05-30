@@ -30,7 +30,7 @@ public class ControllerCliente {
     public  void listarCliente() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/listarCliente";
+			String chamada = "http://localhost:8081/WebService/rest/servicosCliente/listarCliente";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -63,7 +63,7 @@ public class ControllerCliente {
     public String inserir(Cliente dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/addCliente";
+			String chamada = "http://localhost:8081/WebService/rest/servicosCliente/addCliente";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 						
@@ -83,7 +83,7 @@ public class ControllerCliente {
     public String inserirEndereco(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/addCliente";
+			String chamada = "http://localhost:8081/WebService/rest/servicosCliente/addCliente";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -117,7 +117,7 @@ public class ControllerCliente {
       //METODO PEGAR ID PESSOA
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/idCliente/";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosCliente/idCliente/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -126,7 +126,7 @@ public class ControllerCliente {
                 
                  //METODO DELETAR
                 public void deletarCliente(int id) throws Exception{
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/deleteCliente/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosCliente/deleteCliente/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendDelete(chamada);
                     
@@ -137,7 +137,7 @@ public class ControllerCliente {
     //METODO PARA PEGAR DADOS POR ID CLIENTE
                 public Cliente dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/pesqPessoa/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosCliente/pesqPessoa/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -154,7 +154,7 @@ public class ControllerCliente {
                 public String editar(Cliente dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosCliente/updateCliente/";
+			String chamada = "http://localhost:8081/WebService/rest/servicosCliente/updateCliente/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 						

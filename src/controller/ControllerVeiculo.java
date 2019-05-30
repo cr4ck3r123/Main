@@ -26,7 +26,7 @@ public class ControllerVeiculo {
     public String inserirVeiculo(Veiculo dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/inserirVeiculo/";
+			String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/inserirVeiculo/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -60,7 +60,7 @@ public class ControllerVeiculo {
                //METODO PARA PEGAR DADOS POR ID CLIENTE
                 public Veiculo dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/pesqVeiculo/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/pesqVeiculo/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -76,7 +76,7 @@ public class ControllerVeiculo {
               //METODO PARA PEGAR DADOS POR ID VEICULO
                 public Veiculo dadosIdVeiculo(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/pVeiculo/"+id+"";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/pVeiculo/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -138,7 +138,7 @@ public class ControllerVeiculo {
                  //METODO PEGAR ID
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/idVeiculo/";
+                    String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/idVeiculo/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -150,7 +150,7 @@ public class ControllerVeiculo {
                 public  void listarVeiculo(int idVeiculo) throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/listarVeiculo/"+idVeiculo+"";
+			String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/listarVeiculo/"+idVeiculo+"";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                
@@ -180,7 +180,7 @@ public class ControllerVeiculo {
                 public String editar(Veiculo dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/editarVeiculo/";
+			String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/editarVeiculo/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						

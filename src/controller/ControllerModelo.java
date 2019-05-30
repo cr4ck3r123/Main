@@ -25,7 +25,7 @@ public class ControllerModelo {
                     
                      
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebServiceChat/rest/servicosVeiculo/listarModelos/"+id+"";
+			String chamada = "http://localhost:8081/WebService/rest/servicosVeiculo/listarModelos/"+id+"";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
