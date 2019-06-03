@@ -100,4 +100,12 @@ public class ControllerServico {
                   return servico;
                 }
     
+   //METODO DELETAR
+                public void deletar(int id) throws Exception{
+                    String chamada = "http://localhost:8080/WebService/rest/servico/delete/"+id+"";
+                    HttpExemplo http = new HttpExemplo();
+                    String json = http.sendDelete(chamada);
+                    
+                    
+                }
 }

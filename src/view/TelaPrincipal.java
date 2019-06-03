@@ -27,6 +27,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaFuncionario funcionario;
     TelaEstoque estoque;
     TelaOrdemServico os;
+    TelaSobre sobre;
+    TelaContasPagar contasPagar;
+    TelaContasReceber contasReceber;
     
     
     public TelaPrincipal() {
@@ -250,7 +253,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jRadioButtonMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButtonMenuItem3.setSelected(true);
         jRadioButtonMenuItem3.setText("Contas a Pagar");
-        jRadioButtonMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/budget.png"))); // NOI18N
+        jRadioButtonMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/insert-card.png"))); // NOI18N
         jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem3ActionPerformed(evt);
@@ -262,7 +265,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jRadioButtonMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButtonMenuItem9.setSelected(true);
         jRadioButtonMenuItem9.setText("Contas a Receber");
-        jRadioButtonMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/budget.png"))); // NOI18N
+        jRadioButtonMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/desconto-no-pagamento.png"))); // NOI18N
         jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonMenuItem9ActionPerformed(evt);
@@ -409,7 +412,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-      
+       if(contasPagar == null){           
+        contasPagar = new TelaContasPagar();
+            
+        }
+        contasPagar.show();
+        contasPagar.toFront();
+        contasPagar.requestFocus();
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -464,7 +473,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItem7ActionPerformed
 
     private void jRadioButtonMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        if(sobre == null){           
+        sobre = new TelaSobre();
+            
+        }
+        sobre.show();
+        sobre.toFront();
+        sobre.requestFocus();
     }//GEN-LAST:event_jRadioButtonMenuItem5ActionPerformed
 
     private void jRadioButtonMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem8ActionPerformed
@@ -478,7 +493,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonMenuItem8ActionPerformed
 
     private void jRadioButtonMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem9ActionPerformed
-        // TODO add your handling code here:
+        if(contasReceber == null){           
+        contasReceber = new TelaContasReceber();
+            
+        }
+        contasReceber.show();
+        contasReceber.toFront();
+        contasReceber.requestFocus();
     }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
 
     /**

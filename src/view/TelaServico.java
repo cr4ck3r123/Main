@@ -42,6 +42,7 @@ public class TelaServico extends javax.swing.JFrame {
    
        servico = controllerServico.dadosId(id);
        
+       txtId.setText(String.valueOf(servico.getIdservicos()));
        txtDescricao.setText(servico.getTipoServico());
        txtQtde.setText(String.valueOf(servico.getQtde()));
        txtValor.setText(String.valueOf(servico.getValor()));
@@ -383,8 +384,19 @@ public class TelaServico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-
+       int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente exclui este serviço", "Atenção!!!", JOptionPane.YES_NO_OPTION);
        
+        ControllerServico controllerServico = new ControllerServico();
+        
+            if (resposta == JOptionPane.YES_OPTION){
+        try {
+            controllerServico.deletar(Integer.parseInt(txtId.getText()));
+            limparCampos();
+            listar();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed

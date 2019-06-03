@@ -145,7 +145,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Contas a Pagar"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/budget.png"/>
+                  <Image iconType="3" name="/imagens/insert-card.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -163,7 +163,7 @@
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Contas a Receber"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/imagens/budget.png"/>
+                  <Image iconType="3" name="/imagens/desconto-no-pagamento.png"/>
                 </Property>
               </Properties>
               <Events>
