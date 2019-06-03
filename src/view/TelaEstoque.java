@@ -62,7 +62,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     
     void listar() throws Exception{
         ControllerServico servico = new ControllerServico();
-        servico.listarCliente();
+//        servico.listarCliente();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -388,7 +388,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ControllerServico controllerServico = new ControllerServico();
         try {
-            controllerServico.listarCliente();
+//            controllerServico.listarCliente();
         } catch (Exception ex) {
             Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
         }

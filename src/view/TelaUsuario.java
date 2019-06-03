@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
 import net.proteanit.sql.DbUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -439,7 +440,7 @@ txtConfSenha.setText(null);        // TODO add your handling code here:
         
         if(txtSenha.getText().equals(txtConfSenha.getText())){
         user.setLogin(txtLogin.getText());        
-        user.setSenha(txtSenha.getText());
+        user.setSenha(DigestUtils.md5Hex(txtSenha.getText()));
         user.setNome(txtNome.getText());
         user.setEmail(txtEmail.getText());
         try {

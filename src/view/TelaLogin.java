@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -222,7 +223,7 @@ public class TelaLogin extends javax.swing.JFrame {
         Usuario user = new Usuario();
         ControllerUsuario ctlUser = new ControllerUsuario();
         user.setLogin(txtLogin.getText());
-        user.setSenha(txtSenha.getText());
+        user.setSenha(DigestUtils.md5Hex(txtSenha.getText()));
         try {
         if(ctlUser.logar(user) == 1){
         this.dispose();

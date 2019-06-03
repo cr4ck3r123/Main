@@ -24,10 +24,10 @@ public class ControllerServico {
     
     
      // METODO LISTAR
-    public  void listarCliente() throws Exception{
+    public  void listar() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebService/rest/servicos/listarServicos";
+			String chamada = "http://localhost:8080/WebService/rest/servico/listar";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -59,7 +59,7 @@ public class ControllerServico {
     public String inserir(Servico dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebService/rest/servicos/addServico";
+			String chamada = "http://localhost:8080/WebService/rest/servico/adicionar";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -77,27 +77,27 @@ public class ControllerServico {
     //METODO PEGAR ID SERVICO
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebService/rest/servicos/idServico/";
+                    String chamada = "http://localhost:8080/WebService/rest/servico/id/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
                     return json;
                 }
     
-    //METODO PARA PEGAR DADOS POR ID SERVICO
-                public Cliente dadosId(int id) throws Exception{
+                //METODO PARA PEGAR DADOS POR ID SERVICO
+                public Servico dadosId(int idServico) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebService/rest/servicosCliente/pesqPessoa/"+id+"";
+                    String chamada = "http://localhost:8080/WebService/rest/servico/pesquisar/"+idServico+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
                     
-                    java.lang.reflect.Type usuarioType = new TypeToken<Cliente>() {}.getType();
+                    java.lang.reflect.Type usuarioType = new TypeToken<Servico>() {}.getType();
                     
-                    Cliente c = new Cliente();
-                   c = gson.fromJson(json, usuarioType);
+                    Servico servico = new Servico();
+                   servico = gson.fromJson(json, usuarioType);
                     
-                  return c;
+                  return servico;
                 }
     
 }

@@ -24,8 +24,32 @@ public class TelaServico extends javax.swing.JFrame {
         initComponents();
     }
 
-    void setarCamposJson() throws Exception{
     
+    void setarCampos() throws Exception{
+       
+       btnEditar.setEnabled(true);
+       btnRemover.setEnabled(true);
+       btnNovo.setEnabled(false);
+       txtDescricao.setEnabled(true);
+       txtQtde.setEnabled(true);
+       txtValor.setEnabled(true);
+        
+       int row = tblServico.getSelectedRow();
+       int id = Integer.parseInt(tblServico.getValueAt(row, 0).toString());
+       
+       Servico servico = new Servico();
+       ControllerServico controllerServico = new ControllerServico();
+   
+       servico = controllerServico.dadosId(id);
+       
+       txtDescricao.setText(servico.getTipoServico());
+       txtQtde.setText(String.valueOf(servico.getQtde()));
+       txtValor.setText(String.valueOf(servico.getValor()));
+        
+    }
+    void inserir() throws Exception{
+    
+              
         Servico servico = new Servico();
         servico.setTipoServico(txtDescricao.getText());
         servico.setQtde(Integer.parseInt(txtQtde.getText()));
@@ -62,7 +86,7 @@ public class TelaServico extends javax.swing.JFrame {
     
     void listar() throws Exception{
         ControllerServico servico = new ControllerServico();
-        servico.listarCliente();
+        servico.listar();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -215,7 +239,7 @@ public class TelaServico extends javax.swing.JFrame {
 
         txtQtde.setEnabled(false);
 
-        txtValor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtValor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         txtValor.setForeground(new java.awt.Color(102, 0, 0));
         txtValor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtValor.setEnabled(false);
@@ -343,7 +367,7 @@ public class TelaServico extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
      
         try {
-            setarCamposJson();
+            inserir();
             limparCampos();
             listar();
         } catch (Exception ex) {
@@ -368,7 +392,7 @@ public class TelaServico extends javax.swing.JFrame {
        btnNovo.setEnabled(false);
        btnInserir.setEnabled(true);
        ativarCampos();
-              ControllerServico controllerServico = new ControllerServico();
+            ControllerServico controllerServico = new ControllerServico();
             String id;
         try {
             id = controllerServico.retornoid();
@@ -377,8 +401,7 @@ public class TelaServico extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(TelaServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        
+                    
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void txtPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesqActionPerformed
@@ -388,16 +411,19 @@ public class TelaServico extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         ControllerServico controllerServico = new ControllerServico();
         try {
-            controllerServico.listarCliente();
+            controllerServico.listar();
         } catch (Exception ex) {
             Logger.getLogger(TelaServico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void tblServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServicoMouseClicked
-       btnEditar.setEnabled(true);
-       btnRemover.setEnabled(true);
-       btnNovo.setEnabled(false);
+
+        try {
+            setarCampos();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tblServicoMouseClicked
 
     /**

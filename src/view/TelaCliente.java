@@ -536,7 +536,7 @@ public class TelaCliente extends javax.swing.JFrame {
         veiculo.setAno(cbAno.getText());
         veiculo.setCor(txtCor.getText().toUpperCase());
         veiculo.setPlaca(txtPlaca.getText().toUpperCase());
-        veiculo.setKm(Integer.parseInt(txtKm.getText()));
+        veiculo.setKm(Double.parseDouble(txtKm.getText()));
         //Integer.parseInt(txtId.getText()
         veiculo.setPessoa_idpessoa(Integer.parseInt(txtId.getText()));
 

@@ -27,7 +27,7 @@ public class ControllerEndereco {
     		public String inserirEndereco(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebService/rest/servicosEndereco/addEndereco";
+			String chamada = "http://localhost:8080/WebService/rest/endereco/adicionar";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -68,7 +68,7 @@ public class ControllerEndereco {
                  //METODO PARA PEGAR DADOS ENDEREÇO
                 public Endereco dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebService/rest/servicosEndereco/pesqEndereco/"+id+"";
+                    String chamada = "http://localhost:8080/WebService/rest/endereco/pesquisar/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -84,7 +84,7 @@ public class ControllerEndereco {
                 //METODO PEGAR ID ENDERECO
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8081/WebService/rest/servicosEndereco/idEndereco/";
+                    String chamada = "http://localhost:8080/WebService/rest/endereco/id/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -94,7 +94,7 @@ public class ControllerEndereco {
                 public String editar(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8081/WebService/rest/servicosEndereco/editarEndereco/";
+			String chamada = "http://localhost:8080/WebService/rest/endereco/editar/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -110,10 +110,10 @@ public class ControllerEndereco {
 		}
                 
                  //METODO LISTAR ENDEREÇO
-                public  void listarEndereco(int idEndereco) throws Exception{
+                public  void listarEndereco(int idPessoa) throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8081/WebService/rest/servicosEndereco/listaDeEndereco/"+idEndereco+"";
+			String chamada = "http://localhost:8080/WebService/rest/endereco/listar/"+idPessoa+"";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
