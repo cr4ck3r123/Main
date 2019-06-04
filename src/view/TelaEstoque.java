@@ -5,10 +5,12 @@
  */
 package view;
 
+import controller.ControllerEstoque;
 import controller.ControllerServico;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Estoque;
 import modelo.Servico;
 
 /**
@@ -20,19 +22,21 @@ public class TelaEstoque extends javax.swing.JFrame {
     /**
      * Creates new form TelaServico
      */
-    public TelaEstoque() {
+    public TelaEstoque() throws Exception {
         initComponents();
+        ControllerEstoque controllerEstoque = new ControllerEstoque();
+        controllerEstoque.listar();
     }
 
-    void setarCamposJson() throws Exception{
+    void inserir() throws Exception{
     
-        Servico servico = new Servico();
-        servico.setTipoServico(txtDescricao.getText());
-        servico.setQtde(Integer.parseInt(txtQtde.getText()));
-        servico.setValor(Double.parseDouble(txtValor.getText()));
+        Estoque estoque = new Estoque();
+        estoque.setDescricao(txtDescricao.getText());
+        estoque.setQtde(Integer.parseInt(txtQtde.getText()));
+        estoque.setValor(Double.parseDouble(txtValor.getText()));
         
-        ControllerServico controllerServico = new ControllerServico();
-        controllerServico.inserir(servico);
+        ControllerEstoque controllerEstoque = new ControllerEstoque();
+        controllerEstoque.inserir(estoque);
         
     }
     
@@ -61,8 +65,8 @@ public class TelaEstoque extends javax.swing.JFrame {
     }
     
     void listar() throws Exception{
-        ControllerServico servico = new ControllerServico();
-//        servico.listarCliente();
+        ControllerEstoque estoque = new ControllerEstoque();
+         estoque.listar();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,7 +90,7 @@ public class TelaEstoque extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblServico = new javax.swing.JTable();
+        tblEstoque = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -189,7 +193,7 @@ public class TelaEstoque extends javax.swing.JFrame {
 
         jLabel3.setText("ID");
 
-        tblServico.setModel(new javax.swing.table.DefaultTableModel(
+        tblEstoque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -200,12 +204,12 @@ public class TelaEstoque extends javax.swing.JFrame {
                 "ID", "DESCRIÇÃO", "QTDE", "VALOR"
             }
         ));
-        tblServico.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblServicoMouseClicked(evt);
+                tblEstoqueMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblServico);
+        jScrollPane2.setViewportView(tblEstoque);
 
         jLabel4.setText("Descrição");
 
@@ -343,7 +347,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
      
         try {
-            setarCamposJson();
+            inserir();
             limparCampos();
             listar();
         } catch (Exception ex) {
@@ -368,10 +372,10 @@ public class TelaEstoque extends javax.swing.JFrame {
        btnNovo.setEnabled(false);
        btnInserir.setEnabled(true);
        ativarCampos();
-              ControllerServico controllerServico = new ControllerServico();
-            String id;
+              ControllerEstoque controllerEstoque = new ControllerEstoque();
+               String id;
         try {
-            id = controllerServico.retornoid();
+            id = controllerEstoque.retornoid();
             System.out.print(id);
             txtId.setText(id);
         } catch (Exception ex) {
@@ -394,11 +398,11 @@ public class TelaEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void tblServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServicoMouseClicked
+    private void tblEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEstoqueMouseClicked
        btnEditar.setEnabled(true);
        btnRemover.setEnabled(true);
        btnNovo.setEnabled(false);
-    }//GEN-LAST:event_tblServicoMouseClicked
+    }//GEN-LAST:event_tblEstoqueMouseClicked
 
     /**
      * @param args the command line arguments
@@ -431,7 +435,11 @@ public class TelaEstoque extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaEstoque().setVisible(true);
+                try {
+                    new TelaEstoque().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -454,7 +462,7 @@ public class TelaEstoque extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbPesq;
-    public static javax.swing.JTable tblServico;
+    public static javax.swing.JTable tblEstoque;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPesq;
