@@ -68,6 +68,19 @@ public class TelaEstoque extends javax.swing.JFrame {
         ControllerEstoque estoque = new ControllerEstoque();
          estoque.listar();
     }
+    
+    void setar() throws Exception{
+        int row = tblEstoque.getSelectedRow();
+        int id = Integer.parseInt(tblEstoque.getValueAt(row, 0).toString());
+        Estoque estoque = new Estoque();
+        ControllerEstoque controllerEstoque = new ControllerEstoque();
+        estoque = controllerEstoque.dadosId(id);
+        txtId.setText(String.valueOf(estoque.getIdestoques()));
+        txtDescricao.setText(estoque.getDescricao());
+        txtQtde.setText(String.valueOf(estoque.getQtde()));
+        txtValor.setText(String.valueOf(estoque.getValor()));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -402,6 +415,12 @@ public class TelaEstoque extends javax.swing.JFrame {
        btnEditar.setEnabled(true);
        btnRemover.setEnabled(true);
        btnNovo.setEnabled(false);
+        try {
+            setar();
+            ativarCampos();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaEstoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tblEstoqueMouseClicked
 
     /**

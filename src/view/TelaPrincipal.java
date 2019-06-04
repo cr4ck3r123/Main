@@ -464,7 +464,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jRadioButtonMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem7ActionPerformed
            if(estoque == null){           
-            estoque = new TelaEstoque();
+               try {
+                   estoque = new TelaEstoque();
+               } catch (Exception ex) {
+                   Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+               }
             
         }
         estoque.show();

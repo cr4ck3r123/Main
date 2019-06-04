@@ -11,7 +11,7 @@ package modelo;
  */
 public class Estoque {
     
-    private int idestoques;
+    private int idestoque;
     private String descricao;
     private int qtde;
     private double valor;
@@ -20,11 +20,11 @@ public class Estoque {
     }
 
     public int getIdestoques() {
-        return idestoques;
+        return idestoque;
     }
 
     public void setIdestoques(int idestoques) {
-        this.idestoques = idestoques;
+        this.idestoque = idestoques;
     }
 
     public String getDescricao() {

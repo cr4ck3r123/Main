@@ -75,9 +75,24 @@ public class ControllerEstoque {
 		         /* Depois é só setar nosso model na tabela...*/  
                          
 		      view.TelaEstoque.tblEstoque.setModel(model);
-                       view.TelaEstoque.tblEstoque.getColumnModel().getColumn(0).setPreferredWidth(20);
+                      view.TelaEstoque.tblEstoque.getColumnModel().getColumn(0).setPreferredWidth(20);
                           
                    
                 }
     
+      //METODO PARA PEGAR DADOS POR ID 
+                public Estoque dadosId(int id) throws Exception{
+                    
+                    String chamada = "http://localhost:8080/WebService/rest/estoque/pesquisar/"+id+"";
+                    HttpExemplo http = new HttpExemplo();
+                    String json = http.sendGet(chamada);
+                    Gson gson = new Gson();
+                    
+                    java.lang.reflect.Type usuarioType = new TypeToken<Estoque>() {}.getType();
+                    
+                    Estoque estoque = new Estoque();
+                   estoque = gson.fromJson(json, usuarioType);
+                    
+                  return estoque;
+                }
 }

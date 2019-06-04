@@ -164,8 +164,7 @@ public class ControllerCliente {
                     String json = gson.toJson(dados, usuarioType);
                     
                     http.PUT(chamada, json);
-	
-			
+				
 			return msg;
 			
 		}
