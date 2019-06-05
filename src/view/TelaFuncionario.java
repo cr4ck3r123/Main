@@ -7,10 +7,7 @@ package view;
 
 import controller.ControllerCliente;
 import controller.ControllerEndereco;
-import controller.ControllerMarca;
-import controller.ControllerModelo;
-import controller.ControllerUsuario;
-import controller.ControllerVeiculo;
+import controller.ControllerFuncionario;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,10 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Endereco;
-import modelo.Cliente;
-import modelo.Marca;
-import modelo.Usuario;
-import modelo.Veiculo;
+import modelo.Funcionario;
+
 
 /**
  *
@@ -40,35 +35,34 @@ public class TelaFuncionario extends javax.swing.JFrame {
         initComponents();
 
         tabelas.setEnabledAt(1, false);
-       
-
 
     }
 
-    //SETAR CAMPOS PESSOA ENDEREÇO VEICULO
+    //SETAR CAMPOS 
     void setarCampos() throws Exception {
 
         tabelas.setEnabledAt(0, true);
         tabelas.setEnabledAt(1, true);
-        tabelas.setEnabledAt(2, true);
+        
 
         ativarTodosCampos();
-        int row = tblCliente.getSelectedRow();
-        int id = Integer.parseInt(tblCliente.getValueAt(row, 0).toString());
+        int row = tblFuncionario.getSelectedRow();
+        int id = Integer.parseInt(tblFuncionario.getValueAt(row, 0).toString());
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
-        Cliente c = new Cliente();
-        ControllerCliente cliente = new ControllerCliente();
-        c = cliente.dadosId(id);
+        Funcionario fun = new Funcionario();
+        ControllerFuncionario controlFun = new ControllerFuncionario();
+        fun = controlFun.dadosId(id);
         txtId.setText("" + id);
-        txtNome.setText(c.getNome());
-        txtDatNasc.setText(fmt.format(c.getDataNasc()));
-        txtRG.setText(c.getRg());
-        txtCpf.setText(c.getCpf());
-        txtTelefone.setText(c.getTelefone());
-        txtCelular.setText(c.getCelular());
-        txtEmail.setText(c.getEmail());
-        tblCliente.setEnabled(true);
+        txtNome.setText(fun.getNome());
+        txtDatNasc.setText(fmt.format(fun.getDatanascimento()));
+        txtRG.setText(fun.getRg());
+        txtCpf.setText(fun.getCpf());
+        txtTelefone.setText(fun.getTelefone());
+        txtCelular.setText(fun.getCelular());
+        txtEmail.setText(fun.getEmail());
+        txtFuncao.setText(fun.getFuncao());
+        tblFuncionario.setEnabled(true);
         txtPesq.setEnabled(false);
         btnPesq.setEnabled(false);
 
@@ -80,30 +74,21 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtRua.setText(e.getLogradouro());
         txtNum.setText(String.valueOf(e.getNumero()));
         txtComplemento.setText(e.getComplemento());
-        txtCep.setText(e.getCep());
+        txtCepFun.setText(e.getCep());
         txtBairro.setText(e.getBairro());
         txtCidade.setText(e.getLocalidade());
         cbEstado.setSelectedItem(e.getUf());
         controllerEndereco.listarEndereco(id);
-        System.out.print("------------>" + e.getId() + e.getBairro() + "\n");
-
-        ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
-        controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
-        Veiculo v = new Veiculo();
-        ControllerVeiculo veiculo = new ControllerVeiculo();
-        v = veiculo.dadosId(id);
-        
       
-
     }
 
 
 
     //SETAR ID 
     public void id() {
-        ControllerCliente controllerCliente = new ControllerCliente();
+        ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
         try {
-            String id = controllerCliente.retornoid();
+            String id = controllerFuncionario.retornoid();
             txtId.setText(id);
         } catch (Exception ex) {
             Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +98,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
     public void idEndereco() throws Exception {
 
         ControllerEndereco controllerEndereco = new ControllerEndereco();
-
         String id = controllerEndereco.retornoid();
         idEnd.setText(id);
     }
@@ -137,8 +121,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtTelefone.setEnabled(true);
         lbPesq.setEnabled(false);
         txtPesq.setEnabled(false);
-        tblCliente.setEnabled(false);
-
+        tblFuncionario.setEnabled(false);
+        lblFuncao.setEnabled(true);
+        txtFuncao.setEnabled(true);
+        
         lbRua.setEnabled(true);
         txtRua.setEnabled(true);
         lbNum.setEnabled(true);
@@ -146,7 +132,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         lbComplemento.setEnabled(true);
         txtComplemento.setEnabled(true);
         lbCep.setEnabled(true);
-        txtCep.setEnabled(true);
+        txtCepFun.setEnabled(true);
         lbBairro.setEnabled(true);
         txtBairro.setEnabled(true);
         lbCidade.setEnabled(true);
@@ -179,7 +165,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtTelefone.setEnabled(true);
         lbPesq.setEnabled(false);
         txtPesq.setEnabled(false);
-        tblCliente.setEnabled(false);
+        tblFuncionario.setEnabled(false);
 
         btnPesq.setEnabled(false);
         //   btnEditar.setEnabled(true);
@@ -220,12 +206,13 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtRua.setText(null);
         txtNum.setText(null);
         txtComplemento.setText(null);
-        txtCep.setText(null);
+        txtCepFun.setText(null);
         txtBairro.setText(null);
         txtCidade.setText(null);
+        txtFuncao.setText(null);
 
       
-        tblCliente.setEnabled(true);
+        tblFuncionario.setEnabled(true);
 
         btnInserir.setEnabled(false);
         btnEditar.setEnabled(false);
@@ -234,7 +221,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
         tabelas.setEnabledAt(0, false);
         tabelas.setEnabledAt(1, false);
-        tabelas.setEnabledAt(2, false);
         tabelas.setSelectedIndex(0);
 
     }
@@ -251,8 +237,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtComplemento.setEnabled(false);
         txtComplemento.setText(null);
         lbCep.setEnabled(false);
-        txtCep.setEnabled(false);
-        txtCep.setText(null);
+        txtCepFun.setEnabled(false);
+        txtCepFun.setText(null);
         lbBairro.setEnabled(false);
         txtBairro.setEnabled(false);
         txtBairro.setText(null);
@@ -267,38 +253,33 @@ public class TelaFuncionario extends javax.swing.JFrame {
     
     //ATUALIZA TABELA
     void tabela() throws Exception {
-        ControllerCliente controllerCliente = new ControllerCliente();
-        controllerCliente.listarCliente();
+        ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
+        controllerFuncionario.listarFuncionario();
         ControllerEndereco controllerEndereco = new ControllerEndereco();
-        controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));
-        ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
-        controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
+        controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));    
 
     }
 
-    //METODO INSERIR CLIENTE JSON
-    public Cliente inserir() throws ParseException {
+    //METODO INSERIR 
+    public Funcionario inserir() throws ParseException {
 
 //            
         String dataRecebida = txtDatNasc.getText();
-//        String dia = txtDatNasc.getText().substring(0, 2);
-//        String mes = txtDatNasc.getText().substring(3, 5);
-//        String ano = txtDatNasc.getText().substring(6);
-//        String dateFormatada = ano+"-"+mes+"-"+dia;
 
         String[] dataSeparada = dataRecebida.split("/");
         LocalDate hoje = LocalDate.of(Integer.parseInt(dataSeparada[2]), Integer.parseInt(dataSeparada[1]), Integer.parseInt(dataSeparada[0]));
 
-        Cliente cliente = new Cliente();
-        cliente.setNome(txtNome.getText().toUpperCase());
-        cliente.setDataNasc(Date.valueOf(hoje));
-        cliente.setCpf(txtCpf.getText().toUpperCase());
-        cliente.setRg(txtRG.getText().toUpperCase());
-        cliente.setEmail(txtEmail.getText());
-        cliente.setTelefone(txtTelefone.getText().toUpperCase());
-        cliente.setCelular(txtCelular.getText().toUpperCase());
+        Funcionario funcionario = new Funcionario();
+        funcionario.setNome(txtNome.getText().toUpperCase());
+        funcionario.setDatanascimento(Date.valueOf(hoje));
+        funcionario.setCpf(txtCpf.getText().toUpperCase());
+        funcionario.setRg(txtRG.getText().toUpperCase());
+        funcionario.setEmail(txtEmail.getText());
+        funcionario.setTelefone(txtTelefone.getText().toUpperCase());
+        funcionario.setCelular(txtCelular.getText().toUpperCase());
+        funcionario.setFuncao(txtFuncao.getText().toUpperCase());
 
-        return cliente;
+        return funcionario;
     }
 
     //EDITAR PESSOA
@@ -309,24 +290,25 @@ public class TelaFuncionario extends javax.swing.JFrame {
         LocalDate hoje = LocalDate.of(Integer.parseInt(dataSeparada[2]), Integer.parseInt(dataSeparada[1]), Integer.parseInt(dataSeparada[0]));
 
         try {
-            Cliente cliente = new Cliente();
-            ControllerCliente controllerCliente = new ControllerCliente();
-            cliente.setNome(txtNome.getText().toUpperCase());
-            cliente.setDataNasc(Date.valueOf(hoje));
-            cliente.setCpf(txtCpf.getText().toUpperCase());
-            cliente.setRg(txtRG.getText());
-            cliente.setTelefone(txtTelefone.getText());
-            cliente.setCelular(txtCelular.getText());
-            cliente.setEmail(txtEmail.getText());
-            cliente.setId(Integer.parseInt(txtId.getText()));
-            controllerCliente.editar(cliente);
+            Funcionario funcionario = new Funcionario();
+            ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
+            funcionario.setNome(txtNome.getText().toUpperCase());
+            funcionario.setDatanascimento(Date.valueOf(hoje));
+            funcionario.setCpf(txtCpf.getText().toUpperCase());
+            funcionario.setRg(txtRG.getText());
+            funcionario.setTelefone(txtTelefone.getText());
+            funcionario.setCelular(txtCelular.getText());
+            funcionario.setEmail(txtEmail.getText());
+            funcionario.setIdfuncionario(Integer.parseInt(txtId.getText()));
+            funcionario.setFuncao(txtFuncao.getText());
+            controllerFuncionario.editar(funcionario);
 
             Endereco endereco = new Endereco();
             ControllerEndereco controllerEndereco = new ControllerEndereco();
             endereco.setLogradouro(txtRua.getText().toUpperCase());
             endereco.setNumero(Integer.parseInt(txtNum.getText()));
             endereco.setComplemento(txtComplemento.getText().toUpperCase());
-            endereco.setCep(txtCep.getText());
+            endereco.setCep(txtCepFun.getText());
             endereco.setBairro(txtBairro.getText().toUpperCase());
             endereco.setLocalidade(txtCidade.getText().toUpperCase());
             endereco.setUf(cbEstado.getSelectedItem().toString().toUpperCase());
@@ -352,7 +334,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         endereco.setLogradouro(txtRua.getText().toUpperCase());
         endereco.setNumero(Integer.parseInt(txtNum.getText()));
         endereco.setComplemento(txtComplemento.getText().toUpperCase());
-        endereco.setCep(txtCep.getText());
+        endereco.setCep(txtCepFun.getText());
         endereco.setBairro(txtBairro.getText().toUpperCase());
         endereco.setLocalidade(txtCidade.getText().toUpperCase());
         endereco.setUf(cbEstado.getSelectedItem().toString().toUpperCase());
@@ -360,20 +342,20 @@ public class TelaFuncionario extends javax.swing.JFrame {
         return endereco;
     }
 
-    //METODO INSERE DADOS PESSOA
-    int inserePessoa() {
+    //METODO INSERE 
+    int insere() {
         if (txtNome.getText().equals("") || txtRG.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Atenção preencha todos os campos!!!");
 
         } else {
             try {
-                Cliente client = new Cliente();
-                ControllerCliente controllerCliente = new ControllerCliente();
-                client = inserir();
+                Funcionario funcionario = new Funcionario();
+                ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
+                funcionario = inserir();
                 try {
-                    controllerCliente.inserir(client);
+                    controllerFuncionario.inserir(funcionario);
                     JOptionPane.showMessageDialog(rootPane, "Usuario inserido com sucesso!");
-                    tabela();
+                 //   tabela();
                     btnInsert = 1;
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -392,7 +374,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
     //INSERE ENDEREÇO
     int insereEndereco() {
 
-        if (txtRua.getText().equals("") || txtCep.getText().equals("")) {
+        if (txtRua.getText().equals("") || txtCepFun.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Atenção preencha todos os campos!!!");
 
         } else {
@@ -404,7 +386,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
                     controllerEndereco.inserirEndereco(endereco);
                     JOptionPane.showMessageDialog(rootPane, "Endereço inserido com sucesso!!!");
                     limpaEndereco();
-                    //   tabela();
+                    limpar();
+                   
 
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -413,9 +396,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
             btnInsert = 2;
-            tabelas.setSelectedIndex(2);
+            
             tabelas.setEnabledAt(1, false);
-            tabelas.setEnabledAt(2, true);
+          //  tabelas.setEnabledAt(2, false);
+            tabelas.setSelectedIndex(0);
            btnInserir.setEnabled(true);
             btnNovo.setEnabled(false);
         }
@@ -530,16 +514,16 @@ public class TelaFuncionario extends javax.swing.JFrame {
         lbRg = new javax.swing.JLabel();
         lbCpf = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblFuncionario = new javax.swing.JTable();
         txtPesq = new javax.swing.JTextField();
         btnPesq = new javax.swing.JToggleButton();
         lbPesq = new javax.swing.JLabel();
         txtCpf = new javax.swing.JFormattedTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        txtFuncao = new javax.swing.JTextField();
+        lblFuncao = new javax.swing.JLabel();
         endereco = new javax.swing.JPanel();
         txtRua = new javax.swing.JTextField();
-        txtCep = new javax.swing.JTextField();
+        txtCepFun = new javax.swing.JTextField();
         txtBairro = new javax.swing.JTextField();
         lbCidade = new javax.swing.JLabel();
         lbEstado = new javax.swing.JLabel();
@@ -705,7 +689,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         lbCpf.setText("CPF");
         lbCpf.setEnabled(false);
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -716,12 +700,12 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 "ID", "NOME", "DATA NASC", "E-MAIL", "CELULAR", "TELEFONE", "CPF", "RG"
             }
         ));
-        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblClienteMouseClicked(evt);
+                tblFuncionarioMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblCliente);
+        jScrollPane2.setViewportView(tblFuncionario);
 
         txtPesq.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtPesq.addActionListener(new java.awt.event.ActionListener() {
@@ -743,10 +727,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
         }
         txtCpf.setEnabled(false);
 
-        jTextField1.setEnabled(false);
+        txtFuncao.setEnabled(false);
 
-        jLabel3.setText("FUNÇÃO");
-        jLabel3.setEnabled(false);
+        lblFuncao.setText("FUNÇÃO");
+        lblFuncao.setEnabled(false);
 
         javax.swing.GroupLayout clienteLayout = new javax.swing.GroupLayout(cliente);
         cliente.setLayout(clienteLayout);
@@ -813,9 +797,9 @@ public class TelaFuncionario extends javax.swing.JFrame {
                                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
+                                    .addComponent(txtFuncao)
                                     .addGroup(clienteLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addComponent(lblFuncao)
                                         .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap())
         );
@@ -843,12 +827,12 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTelefone)
                     .addComponent(lbCelular)
-                    .addComponent(jLabel3))
+                    .addComponent(lblFuncao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbEmail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -871,11 +855,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtRua.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtRua.setEnabled(false);
 
-        txtCep.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        txtCep.setEnabled(false);
-        txtCep.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtCepFun.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtCepFun.setEnabled(false);
+        txtCepFun.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtCepFocusLost(evt);
+                txtCepFunFocusLost(evt);
             }
         });
 
@@ -979,7 +963,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbCep)
-                                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtCepFun, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 27, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1008,7 +992,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCepFun, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbBairro)
                         .addGap(1, 1, 1)
@@ -1066,7 +1050,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
 
         if (btnInsert == 0) {
-            inserePessoa();
+            insere();
             tabelas.setSelectedIndex(1);
             tabelas.setEnabledAt(0, false);
             tabelas.setEnabledAt(1, true);
@@ -1096,10 +1080,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        ControllerCliente cliente = new ControllerCliente();
+        ControllerFuncionario funcionario = new ControllerFuncionario();
 
         try {
-            cliente.listarCliente();
+            funcionario.listarFuncionario();
 
         } catch (Exception ex) {
             Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
@@ -1156,13 +1140,12 @@ public class TelaFuncionario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbEstadoActionPerformed
 
-    private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
+    private void txtCepFunFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFunFocusLost
         ControllerEndereco controllerEndereco = new ControllerEndereco();
-        System.out.print(txtCep.getText());
-        Endereco cep = new Endereco();
+         String x = txtCepFun.getText();
         try {
-
-            cep = controllerEndereco.pegaEndereco();
+            Endereco cep = new Endereco();
+            cep = controllerEndereco.pegaEndereco(x);
             txtRua.setText(cep.getLogradouro());
             txtCidade.setText(cep.getLocalidade());
             txtBairro.setText(cep.getBairro());
@@ -1172,20 +1155,20 @@ public class TelaFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "CPF invalido!!!");
             Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_txtCepFocusLost
+    }//GEN-LAST:event_txtCepFunFocusLost
 
     private void txtPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesqActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPesqActionPerformed
 
-    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+    private void tblFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFuncionarioMouseClicked
         try {
             setarCampos();
 
         } catch (Exception ex) {
             Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_tblClienteMouseClicked
+    }//GEN-LAST:event_tblFuncionarioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1236,7 +1219,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -1244,7 +1226,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbCelular;
     private javax.swing.JLabel lbCep;
@@ -1260,18 +1241,20 @@ public class TelaFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel lbRg;
     private javax.swing.JLabel lbRua;
     private javax.swing.JLabel lbTelefone;
+    private javax.swing.JLabel lblFuncao;
     private javax.swing.JTabbedPane tabelas;
-    private javax.swing.JTable tbEndereco;
-    private javax.swing.JTable tblCliente;
+    public static javax.swing.JTable tbEndereco;
+    public static javax.swing.JTable tblFuncionario;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JFormattedTextField txtCelular;
-    private javax.swing.JTextField txtCep;
+    public static javax.swing.JTextField txtCepFun;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtComplemento;
-    private javax.swing.JFormattedTextField txtCpf;
+    public static javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtDatNasc;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtFuncao;
+    public static javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNum;
     private javax.swing.JTextField txtPesq;

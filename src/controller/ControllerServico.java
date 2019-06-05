@@ -27,7 +27,7 @@ public class ControllerServico {
     public  void listar() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8080/WebService/rest/servico/listar";
+			String chamada = "http://localhost:8090/WebService/rest/servico/listar";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -59,7 +59,7 @@ public class ControllerServico {
     public String inserir(Servico dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8080/WebService/rest/servico/adicionar";
+			String chamada = "http://localhost:8090/WebService/rest/servico/adicionar";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -77,7 +77,7 @@ public class ControllerServico {
     //METODO PEGAR ID SERVICO
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/servico/id/";
+                    String chamada = "http://localhost:8090/WebService/rest/servico/id/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -87,7 +87,7 @@ public class ControllerServico {
                 //METODO PARA PEGAR DADOS POR ID SERVICO
                 public Servico dadosId(int idServico) throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/servico/pesquisar/"+idServico+"";
+                    String chamada = "http://localhost:8090/WebService/rest/servico/pesquisar/"+idServico+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -102,7 +102,7 @@ public class ControllerServico {
     
    //METODO DELETAR
                 public void deletar(int id) throws Exception{
-                    String chamada = "http://localhost:8080/WebService/rest/servico/delete/"+id+"";
+                    String chamada = "http://localhost:8090/WebService/rest/servico/delete/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendDelete(chamada);
                     

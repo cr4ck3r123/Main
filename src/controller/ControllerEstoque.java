@@ -23,7 +23,7 @@ public class ControllerEstoque {
     public String inserir(Estoque dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8080/WebService/rest/estoque/adicionar";
+			String chamada = "http://localhost:8090/WebService/rest/estoque/adicionar";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -41,7 +41,7 @@ public class ControllerEstoque {
                //METODO PEGAR ID SERVICO
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/estoque/id/";
+                    String chamada = "http://localhost:8090/WebService/rest/estoque/id/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -53,7 +53,7 @@ public class ControllerEstoque {
     public  void listar() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8080/WebService/rest/estoque/listar";
+			String chamada = "http://localhost:8090/WebService/rest/estoque/listar";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -83,7 +83,7 @@ public class ControllerEstoque {
       //METODO PARA PEGAR DADOS POR ID 
                 public Estoque dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/estoque/pesquisar/"+id+"";
+                    String chamada = "http://localhost:8090/WebService/rest/estoque/pesquisar/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();

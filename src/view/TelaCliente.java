@@ -134,6 +134,8 @@ public class TelaCliente extends javax.swing.JFrame {
         btnAddVeiculo.setEnabled(true);
 
     }
+    
+
 
     //SETAR ID 
     public void id() {
@@ -141,11 +143,13 @@ public class TelaCliente extends javax.swing.JFrame {
         try {
             String id = controllerCliente.retornoid();
             txtId.setText(id);
+                
         } catch (Exception ex) {
             Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    // IDENDERECO
     public void idEndereco() throws Exception {
 
         ControllerEndereco controllerEndereco = new ControllerEndereco();
@@ -1498,11 +1502,11 @@ public class TelaCliente extends javax.swing.JFrame {
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
         ControllerEndereco controllerEndereco = new ControllerEndereco();
-        System.out.print(txtCep.getText());
+        String x = txtCep.getText();
         Endereco cep = new Endereco();
         try {
 
-            cep = controllerEndereco.pegaEndereco();
+            cep = controllerEndereco.pegaEndereco(x);
             txtRua.setText(cep.getLogradouro());
             txtCidade.setText(cep.getLocalidade());
             txtBairro.setText(cep.getBairro());

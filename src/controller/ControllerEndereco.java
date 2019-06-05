@@ -27,7 +27,7 @@ public class ControllerEndereco {
     		public String inserirEndereco(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8080/WebService/rest/endereco/adicionar";
+			String chamada = "http://localhost:8090/WebService/rest/endereco/adicionar";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -43,11 +43,11 @@ public class ControllerEndereco {
 		}
     
                  //METODO PEGA ENDEREÇO DA API 
-                public  Endereco pegaEndereco() throws Exception{
-                    
-                        String txtcep = txtCep.getText();
+                public  Endereco pegaEndereco(String txtCep) throws Exception{
+                        
+                       
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "https://viacep.com.br/ws/"+txtcep+"/json/";
+			String chamada = "https://viacep.com.br/ws/"+txtCep+"/json/";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -58,8 +58,7 @@ public class ControllerEndereco {
 		                                             
                      Endereco cep = new Endereco();
                      cep = gson.fromJson(json, usuarioType);
-                     System.out.print(cep.getBairro());
-		                  
+                     System.out.print(cep.getBairro());                  
                           
                   
                     return cep;                
@@ -68,7 +67,7 @@ public class ControllerEndereco {
                  //METODO PARA PEGAR DADOS ENDEREÇO
                 public Endereco dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/endereco/pesquisar/"+id+"";
+                    String chamada = "http://localhost:8090/WebService/rest/endereco/pesquisar/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();
@@ -84,7 +83,7 @@ public class ControllerEndereco {
                 //METODO PEGAR ID ENDERECO
                 public String retornoid() throws Exception{
                     
-                    String chamada = "http://localhost:8080/WebService/rest/endereco/id/";
+                    String chamada = "http://localhost:8090/WebService/rest/endereco/id/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     
@@ -94,7 +93,7 @@ public class ControllerEndereco {
                 public String editar(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8080/WebService/rest/endereco/editar/";
+			String chamada = "http://localhost:8090/WebService/rest/endereco/editar/";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -113,7 +112,7 @@ public class ControllerEndereco {
                 public  void listarEndereco(int idPessoa) throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8080/WebService/rest/endereco/listar/"+idPessoa+"";
+			String chamada = "http://localhost:8090/WebService/rest/endereco/listar/"+idPessoa+"";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
