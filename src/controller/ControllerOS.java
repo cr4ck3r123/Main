@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Funcionario;
+import modelo.Veiculo;
 import net.proteanit.sql.DbUtils;
 import view.TelaCliente;
 import view.TelaOrdemServico;
@@ -51,9 +52,10 @@ public class ControllerOS {
 
         HttpExemplo http = new HttpExemplo();
         String chamada = "http://localhost:8090/WebService/rest/os/listarCliente/"+nome+"";
-        System.out.print(chamada);
-        String json = http.sendGet(chamada);
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+       
+      
+            String json = http.sendGet(chamada);
+              Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         java.lang.reflect.Type usuarioType = new TypeToken<List<Cliente>>() {
         }.getType();
         List<Cliente> listaCliente = gson.fromJson(json, usuarioType);
@@ -64,8 +66,33 @@ public class ControllerOS {
 		         }  
         view.TelaOrdemServico.tblClientesOs.setModel(model);
         view.TelaOrdemServico.tblClientesOs.getColumnModel().getColumn(0).setPreferredWidth(20);
+       
+      
    //     JOptionPane.showMessageDialog(null, e);
 
+    }
+    
+    //LISTA VEICULOS DO CLIENTE
+    public void listarVeiculo(int id) throws Exception{
+        HttpExemplo http = new HttpExemplo();
+        String chamada = "http://localhost:8090/WebService/rest/os/listarModelo/"+id+"";
+        String json = http.sendGet(chamada);
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        
+         //  Usuario u = new Usuario();
+        java.lang.reflect.Type usuarioType = new TypeToken<List<Veiculo>>() {
+        }.getType();
+
+        List<Veiculo> listaVeiculo = gson.fromJson(json, usuarioType);
+
+        /* Cria o model*/
+        
+        /* Itera a lista, criando o objeto "Cliente" apenas para pegar suas Strings.*/
+        TelaOrdemServico.cbVeiculo.removeAllItems();        
+        for (Veiculo veiculoRetorno : listaVeiculo) {
+            // model.addRow(new Object[]{marcaRetorno.getId(), marcaRetorno.getNome()});  
+            TelaOrdemServico.cbVeiculo.addItem(veiculoRetorno.getModelo());
+        }
     }
 
 }

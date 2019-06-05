@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -40,7 +41,16 @@ public class TelaOrdemServico extends javax.swing.JFrame {
        
     }
      
-     
+     public void setar() throws Exception{
+         
+          int row = tblClientesOs.getSelectedRow();
+          int id = Integer.parseInt(tblClientesOs.getValueAt(row, 0).toString());
+          
+          txtCliId.setText(String.valueOf(id));
+          
+          ControllerOS os = new ControllerOS();
+          os.listarVeiculo(id);          
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,7 +103,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtOsValor = new javax.swing.JFormattedTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbVeiculo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -482,7 +492,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbVeiculo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtOsDefeito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -505,7 +515,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                        .addComponent(cbVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
@@ -540,13 +550,18 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         try {
             os.listarCliente(x);
         } catch (Exception ex) {
-            Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+          // Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Selecione o Cliente !!!");
         }
     }//GEN-LAST:event_txtCliPesquisarKeyReleased
 
     private void tblClientesOsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesOsMouseClicked
-        // Chamando o mentodo setar campos
-      //  setar_campos_os();
+        try {
+            // Chamando o mentodo setar campos
+            setar();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tblClientesOsMouseClicked
 
     private void txtOsDefeitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOsDefeitoActionPerformed
@@ -629,10 +644,10 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFinalizar;
+    public static javax.swing.JComboBox cbVeiculo;
     public static javax.swing.JComboBox<String> cbfuncionario;
     private javax.swing.JComboBox<String> cboOsSit;
     private javax.swing.ButtonGroup grupoDeBtn;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
