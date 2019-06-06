@@ -500,7 +500,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         txtOsValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
         txtOsValor.setText("0");
         txtOsValor.setEnabled(false);
-        txtOsValor.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtOsValor.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout PanelProdutoLayout = new javax.swing.GroupLayout(PanelProduto);
         PanelProduto.setLayout(PanelProdutoLayout);
@@ -740,7 +740,43 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorItemActionPerformed
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-      
+        
+        int imprimiOs = JOptionPane.showConfirmDialog(null, "Deseja Imprimir a nota ?", "Atenção", JOptionPane.YES_NO_OPTION);
+       
+          if (imprimiOs == JOptionPane.NO_OPTION) {
+                txtPesq.setText(null);
+                txtValorItem.setText(null);
+                txtId.setText(null);
+                txtOsValor.setText("0");
+                txtDesconto.setText("0");
+                txtQtde.setText("0");
+            }
+                
+        if (imprimiOs == JOptionPane.YES_OPTION) {
+            String sql = "select insere_total(?)";
+            
+           
+            try {
+            /*    pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtOsValor.getText());
+                pst.executeQuery();*/
+               
+                //JasperPrint print = JasperFillManager.fillReport("c:/reports/clientes.jasper", null, conexao);
+                txtPesq.setText(null);
+                txtValorItem.setText(null);
+                txtId.setText(null);
+                txtOsValor.setText("0");
+                txtDesconto.setText("0");
+                txtQtde.setText("0");
+           
+              //  JasperViewer.viewReport(print, false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+                
+            }
+            
+           
+        }
 
         
     }//GEN-LAST:event_btnFinalizarActionPerformed
