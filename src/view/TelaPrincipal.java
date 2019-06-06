@@ -66,9 +66,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jRadioButtonMenuItem10 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
+        jMenu7 = new javax.swing.JMenu();
         jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem9 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem8 = new javax.swing.JRadioButtonMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jRadioButtonMenuItem11 = new javax.swing.JRadioButtonMenuItem();
+        jRadioButtonMenuItem12 = new javax.swing.JRadioButtonMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jRadioButtonMenuItem5 = new javax.swing.JRadioButtonMenuItem();
 
@@ -249,29 +254,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Movimentação");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jRadioButtonMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jRadioButtonMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButtonMenuItem3.setSelected(true);
-        jRadioButtonMenuItem3.setText("Contas a Pagar");
-        jRadioButtonMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/insert-card.png"))); // NOI18N
-        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonMenuItem10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItem10.setSelected(true);
+        jRadioButtonMenuItem10.setText("Movimento");
+        jRadioButtonMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mover-opcao.png"))); // NOI18N
+        jRadioButtonMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem3ActionPerformed(evt);
+                jRadioButtonMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu5.add(jRadioButtonMenuItem3);
-
-        jRadioButtonMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jRadioButtonMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jRadioButtonMenuItem9.setSelected(true);
-        jRadioButtonMenuItem9.setText("Contas a Receber");
-        jRadioButtonMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/desconto-no-pagamento.png"))); // NOI18N
-        jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jRadioButtonMenuItem9);
+        jMenu5.add(jRadioButtonMenuItem10);
 
         jRadioButtonMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jRadioButtonMenuItem8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -286,6 +279,66 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu5.add(jRadioButtonMenuItem8);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/financeior.png"))); // NOI18N
+        jMenu7.setText("Financeiro");
+        jMenu7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jRadioButtonMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonMenuItem3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItem3.setSelected(true);
+        jRadioButtonMenuItem3.setText("Contas a Pagar");
+        jRadioButtonMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/insert-card.png"))); // NOI18N
+        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jRadioButtonMenuItem3);
+
+        jRadioButtonMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonMenuItem9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItem9.setSelected(true);
+        jRadioButtonMenuItem9.setText("Contas a Receber");
+        jRadioButtonMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/desconto-no-pagamento.png"))); // NOI18N
+        jRadioButtonMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jRadioButtonMenuItem9);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/relatorio.png"))); // NOI18N
+        jMenu8.setText("Relatorios");
+        jMenu8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jRadioButtonMenuItem11.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonMenuItem11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItem11.setSelected(true);
+        jRadioButtonMenuItem11.setText("Mensal");
+        jRadioButtonMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/insert-card.png"))); // NOI18N
+        jRadioButtonMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jRadioButtonMenuItem11);
+
+        jRadioButtonMenuItem12.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jRadioButtonMenuItem12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jRadioButtonMenuItem12.setSelected(true);
+        jRadioButtonMenuItem12.setText("Anual");
+        jRadioButtonMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/desconto-no-pagamento.png"))); // NOI18N
+        jRadioButtonMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jRadioButtonMenuItem12);
+
+        jMenuBar1.add(jMenu8);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/configuration.png"))); // NOI18N
         jMenu6.setText("Ajuda");
@@ -506,6 +559,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         contasReceber.requestFocus();
     }//GEN-LAST:event_jRadioButtonMenuItem9ActionPerformed
 
+    private void jRadioButtonMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem10ActionPerformed
+
+    private void jRadioButtonMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem11ActionPerformed
+
+    private void jRadioButtonMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -549,11 +614,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem10;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem11;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem12;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;

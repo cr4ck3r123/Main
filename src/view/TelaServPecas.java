@@ -9,6 +9,7 @@ import controller.ControllerEstoque;
 import controller.ControllerServico;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +23,31 @@ public class TelaServPecas extends javax.swing.JFrame {
     public TelaServPecas() {
         initComponents();
     }
+    
+    
+      public void setar_campos_ServPec(){
+   /*    
+       TelaLocaServPecas localizar = null;
+       localizar = new TelaLocaServPecas();
+                localizar.setVisible(true);
+        */
+            try {
+               
+                int setar = tblServPec.getSelectedRow();        
+                
+                TelaOrdemServico.txtId.setText(tblServPec.getModel().getValueAt(setar, 0).toString());
+                TelaOrdemServico.txtPesq.setText(tblServPec.getModel().getValueAt(setar, 1).toString());
+                TelaOrdemServico.txtValorItem.setText(tblServPec.getModel().getValueAt(setar, 3).toString());
+               TelaOrdemServico.txtQtde.setText("1");
+               JOptionPane.showMessageDialog(null, "Localizado");
+                
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+   
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,7 +175,7 @@ public class TelaServPecas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblServPecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServPecMouseClicked
-
+        setar_campos_ServPec();
     }//GEN-LAST:event_tblServPecMouseClicked
 
     private void cbCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbCategoriaItemStateChanged
