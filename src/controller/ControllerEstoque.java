@@ -80,6 +80,38 @@ public class ControllerEstoque {
                    
                 }
     
+        // METODO LISTAR
+    public  void listarServEstoque() throws Exception{
+                    
+                        HttpExemplo http = new HttpExemplo();
+			String chamada = "http://localhost:8090/WebService/rest/estoque/listar";
+			String json = http.sendGet(chamada);
+			Gson gson = new Gson();
+                        
+                        Estoque estoque = new Estoque();
+                        java.lang.reflect.Type usuarioType = new TypeToken<List<Estoque>>() {}.getType();
+                      
+                        List<Estoque> listaEstoque = gson.fromJson(json, usuarioType);
+                        
+                       
+		         /* Cria o model*/  
+		         DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "DESCRIÇÃO", "QTDE", "R$"});
+                         
+		         /* Itera a lista, criando o objeto "Cliente" apenas para pegar suas Strings.*/  
+                         //SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+                         
+		         for (Estoque estoqueRetorno : listaEstoque) {  
+                            model.addRow(new Object[]{estoqueRetorno.getIdestoques(), estoqueRetorno.getDescricao(), estoqueRetorno.getQtde(), estoqueRetorno.getValor()});  
+		         }  
+		         /* Depois é só setar nosso model na tabela...*/  
+                         
+		      view.TelaServPecas.tblServPec.setModel(model);
+                      view.TelaServPecas.tblServPec.getColumnModel().getColumn(0).setPreferredWidth(20);
+                          
+                   
+                }
+    
+    
       //METODO PARA PEGAR DADOS POR ID 
                 public Estoque dadosId(int id) throws Exception{
                     

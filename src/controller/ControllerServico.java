@@ -54,6 +54,36 @@ public class ControllerServico {
                    
                 }
     
+         // METODO LISTAR
+    public  void listarServPecas() throws Exception{
+                    
+                        HttpExemplo http = new HttpExemplo();
+			String chamada = "http://localhost:8090/WebService/rest/servico/listar";
+			String json = http.sendGet(chamada);
+			Gson gson = new Gson();
+                        
+                        Servico s = new Servico();
+                        java.lang.reflect.Type usuarioType = new TypeToken<List<Servico>>() {}.getType();
+                      
+                        List<Servico> listaServico = gson.fromJson(json, usuarioType);
+                        
+                       
+		         /* Cria o model*/  
+		         DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "DESCRIÇÃO", "QTDE", "R$"});
+                         
+		         /* Itera a lista, criando o objeto "Cliente" apenas para pegar suas Strings.*/  
+                         //SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+                         
+		         for (Servico servicoRetorno : listaServico) {  
+                            model.addRow(new Object[]{servicoRetorno.getIdservicos(), servicoRetorno.getTipoServico(), servicoRetorno.getQtde(), servicoRetorno.getValor()});  
+		         }  
+		         /* Depois é só setar nosso model na tabela...*/  
+                         
+		      view.TelaServPecas.tblServPec.setModel(model);
+                       view.TelaServPecas.tblServPec.getColumnModel().getColumn(0).setPreferredWidth(20);
+                          
+                   
+                }
                         
                 //METODO INSERIR SERVICOS
     public String inserir(Servico dados) throws Exception {

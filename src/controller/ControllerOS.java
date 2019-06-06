@@ -94,5 +94,15 @@ public class ControllerOS {
             TelaOrdemServico.cbVeiculo.addItem(veiculoRetorno.getModelo());
         }
     }
+    
+    //SETA ID
+    public String setarId() throws Exception{
+        HttpExemplo http = new HttpExemplo();
+        String chamada = "http://localhost:8090/WebService/rest/os/id/";
+        String json = http.sendGet(chamada);
+   
+        return json;     
+        
+    }
 
 }
