@@ -21,6 +21,8 @@ public class Formatador {
             }else{
                 retorno += pString.charAt(i);
             }
+             
+            
         }  
         
         return Float.parseFloat(retorno);

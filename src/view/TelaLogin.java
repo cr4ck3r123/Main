@@ -233,7 +233,7 @@ public class TelaLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Usuario ou senha incorretos...");
         }
         } catch (Exception ex) {
-          //  JOptionPane.showMessageDialog(rootPane, "Base de dados desligada...");
+           JOptionPane.showMessageDialog(rootPane, "Impossivel de fazer Conexão...");
           //  Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
        

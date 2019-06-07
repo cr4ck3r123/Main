@@ -36,22 +36,12 @@ public class ControllerUsuario {
 		  		
 		//Gson gson = new Gson();
 		//gson.toJson(resposta);
-		    if(json.equals("Usuario logado com sucesso.")) {
-		    System.out.print(json);
-		    i = 1;
+		    if(json.equals("1")) {
+		        i = 1;
 		    }else {
-		    	i = 0;
-		    	System.out.print("Usuario invalido");
+		    	i = 0;    
 		    }
-		String msg= "";
-		try {							
-			if(json.equals(true)) {
-			System.out.print(json);
-			}
-						
-		} catch (Exception e) {
-			
-		}
+		
 		return i;
 	}
                     

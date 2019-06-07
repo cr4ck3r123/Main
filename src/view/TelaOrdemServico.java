@@ -71,13 +71,13 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         
     public void excluir_item() {
         Formatador formatador = new Formatador();
-        float valorTotal;
+        double valorTotal;
         DefaultTableModel dtmProdutos = (DefaultTableModel) tblItemPecas.getModel();
         txtQtde.getText();
         int qtde = Integer.parseInt(txtQtde.getText().trim());
         double desconto = (double) Double.parseDouble(txtDesconto.getText().trim());
         double valor = (double) Double.parseDouble(txtValorItem.getText().trim());
-         valorTotal = Float.parseFloat(txtOsValor.getText().trim());
+        valorTotal = formatador.converterVirgulaParaPonto(txtOsValor.getText().trim());
         double resultado = valor * qtde - desconto;
       
         Object[] dados = {txtPesq.getText(), txtQtde.getText(), resultado};
@@ -498,9 +498,11 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         txtOsValor.setEditable(false);
         txtOsValor.setForeground(new java.awt.Color(204, 0, 0));
         txtOsValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        txtOsValor.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtOsValor.setText("0");
         txtOsValor.setEnabled(false);
         txtOsValor.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        txtOsValor.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout PanelProdutoLayout = new javax.swing.GroupLayout(PanelProduto);
         PanelProduto.setLayout(PanelProdutoLayout);
@@ -741,7 +743,8 @@ public class TelaOrdemServico extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         
-        int imprimiOs = JOptionPane.showConfirmDialog(null, "Deseja Imprimir a nota ?", "Atenção", JOptionPane.YES_NO_OPTION);
+        String total = txtOsValor.getText();
+        int imprimiOs = JOptionPane.showConfirmDialog(null, "Valor Total: "+total+"\nDeseja Imprimir a nota ?", "Atenção", JOptionPane.YES_NO_OPTION);
        
           if (imprimiOs == JOptionPane.NO_OPTION) {
                 txtPesq.setText(null);
