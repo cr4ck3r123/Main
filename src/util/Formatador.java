@@ -28,6 +28,15 @@ public class Formatador {
         return Float.parseFloat(retorno);
     }
     
+    public int pegarValor(String num){
+        
+       String retorno = new String(num);
+        int tamanhoString = retorno.indexOf("-");
+        System.out.println();
+       
+      String i = retorno.substring(0, tamanhoString);        
+        return Integer.parseInt(i);
+    }
     
     
 }

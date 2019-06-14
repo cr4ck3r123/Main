@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import modelo.OS;
 import net.proteanit.sql.DbUtils;
 import util.Formatador;
 
@@ -30,7 +31,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     /**
      * Creates new form TelaOrdemServico
      */
-    
+    Formatador f = new Formatador();
     String tipo;
     public TelaOrdemServico() {
         initComponents();
@@ -116,7 +117,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     
     
     
-    public void inseridoOs(){
+    public void inseridoOs() throws Exception{
                 
         txtCliPesquisar.setEnabled(false);
         tblClientesOs.setEnabled(false);
@@ -137,6 +138,18 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         btnFinalizar.setEnabled(true);
         tblItemPecas.setEnabled(true);
         PanelProduto.setEnabled(true);
+        
+        
+        OS os = new OS();
+        ControllerOS controllerOS = new ControllerOS();
+        os.setIdfuncionario(Integer.parseInt(txtFunId.getText()));
+        os.setTipo(tipo);
+        os.setDefeito(txtOsDefeito.getText().toUpperCase());
+        os.setSituacao(cboOsSit.getSelectedItem().toString().toUpperCase());
+        os.setIdpessoa(Integer.parseInt(txtCliId.getText()));
+        os.setIdveiculo(Integer.parseInt(txtIdVeiculo.getText()));
+         controllerOS.inserir_os(os);
+        
         
     }
     
@@ -159,6 +172,18 @@ public class TelaOrdemServico extends javax.swing.JFrame {
           ControllerOS os = new ControllerOS();
           os.listarVeiculo(id);          
      }
+     
+      public void limpaTabela(){
+        DefaultTableModel tblRemove = (DefaultTableModel) tblItemPecas.getModel();
+        if (tblRemove.getRowCount() > 0){
+            
+            while(tblRemove.getRowCount() > 0){
+                tblRemove.removeRow(0);
+            }
+            
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,6 +238,8 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         txtOsValor = new javax.swing.JFormattedTextField();
         cbVeiculo = new javax.swing.JComboBox();
         btnOS = new javax.swing.JButton();
+        txtFunId = new javax.swing.JTextField();
+        txtIdVeiculo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -396,6 +423,11 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         jLabel9.setText("Mecanico");
 
         cbfuncionario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        cbfuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbfuncionarioActionPerformed(evt);
+            }
+        });
 
         txtOsDefeito.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtOsDefeito.addActionListener(new java.awt.event.ActionListener() {
@@ -593,10 +625,32 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        cbVeiculo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbVeiculoItemStateChanged(evt);
+            }
+        });
+        cbVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVeiculoActionPerformed(evt);
+            }
+        });
+
         btnOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/success_icon-icons.com_52365.png"))); // NOI18N
         btnOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOSActionPerformed(evt);
+            }
+        });
+
+        txtFunId.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtFunId.setEnabled(false);
+
+        txtIdVeiculo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtIdVeiculo.setEnabled(false);
+        txtIdVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdVeiculoActionPerformed(evt);
             }
         });
 
@@ -615,22 +669,26 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                             .addComponent(cboOsSit, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbfuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtOsDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbVeiculo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(250, 250, 250)
-                                        .addComponent(btnOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())))))
+                                .addComponent(txtFunId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbfuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cbVeiculo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtOsDefeito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtIdVeiculo))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(250, 250, 250)
+                                    .addComponent(btnOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -641,19 +699,17 @@ public class TelaOrdemServico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtOsDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnOS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -662,8 +718,14 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                         .addComponent(cboOsSit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbfuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbfuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFunId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtOsDefeito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnOS, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PanelProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -674,12 +736,12 @@ public class TelaOrdemServico extends javax.swing.JFrame {
 
     private void rbtOrcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOrcActionPerformed
         // atribuindo um texto a variavel tipo se selecionado
-        tipo = "Orçamento";
+        tipo = "ORÇAMENTO";
     }//GEN-LAST:event_rbtOrcActionPerformed
 
     private void rbtOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOsActionPerformed
         // A linha baixo atribui um texto a variavel tipo se o radio button estiver selecionado
-        tipo = "Ordem Serviço";
+        tipo = "ORDEM DE SERVIÇO";
     }//GEN-LAST:event_rbtOsActionPerformed
 
     private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
@@ -698,9 +760,14 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     private void tblClientesOsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesOsMouseClicked
         try {
             // Chamando o mentodo setar campos
+           
             setar();
+           int num = (f.pegarValor(cbVeiculo.getSelectedItem().toString()));
+           txtIdVeiculo.setText(""+num);
+         
         } catch (Exception ex) {
-            Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Selecione o Cliente!!!");
+            //Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tblClientesOsMouseClicked
 
@@ -745,20 +812,11 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         
         String total = txtOsValor.getText();
         int imprimiOs = JOptionPane.showConfirmDialog(null, "Valor Total: "+total+"\nDeseja Imprimir a nota ?", "Atenção", JOptionPane.YES_NO_OPTION);
-       
-          if (imprimiOs == JOptionPane.NO_OPTION) {
-                txtPesq.setText(null);
-                txtValorItem.setText(null);
-                txtId.setText(null);
-                txtOsValor.setText("0");
-                txtDesconto.setText("0");
-                txtQtde.setText("0");
-            }
-                
+       DefaultTableModel dtmProdutos = (DefaultTableModel) tblItemPecas.getModel();
+      
         if (imprimiOs == JOptionPane.YES_OPTION) {
             String sql = "select insere_total(?)";
-            
-           
+                      
             try {
             /*    pst = conexao.prepareStatement(sql);
                 pst.setString(1, txtOsValor.getText());
@@ -771,13 +829,15 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                 txtOsValor.setText("0");
                 txtDesconto.setText("0");
                 txtQtde.setText("0");
-           
+                limpaTabela();
+        
               //  JasperViewer.viewReport(print, false);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
                 
-            }
+            } 
             
+          
            
         }
 
@@ -804,9 +864,38 @@ public class TelaOrdemServico extends javax.swing.JFrame {
         if(txtCliPesquisar.getText().equals("") || txtOsDefeito.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Preencha os campos para poder gerar a OS!!!");
         }else {
-        inseridoOs();
+            try {
+                inseridoOs();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
     }//GEN-LAST:event_btnOSActionPerformed
+
+    private void cbfuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbfuncionarioActionPerformed
+      
+       String nome = TelaOrdemServico.cbfuncionario.getSelectedItem().toString();
+       ControllerOS controllerOS = new ControllerOS();
+        try {
+           txtFunId.setText(String.valueOf(controllerOS.idfuncionario(nome)));
+        } catch (Exception ex) {
+            Logger.getLogger(TelaOrdemServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbfuncionarioActionPerformed
+
+    private void txtIdVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdVeiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdVeiculoActionPerformed
+
+    private void cbVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVeiculoActionPerformed
+            
+               
+    }//GEN-LAST:event_cbVeiculoActionPerformed
+
+    private void cbVeiculoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbVeiculoItemStateChanged
+            int num = (f.pegarValor(cbVeiculo.getSelectedItem().toString()));
+           txtIdVeiculo.setText(""+num);
+    }//GEN-LAST:event_cbVeiculoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -882,7 +971,9 @@ public class TelaOrdemServico extends javax.swing.JFrame {
     private javax.swing.JTextField txtCliPesquisar;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDesconto;
+    private javax.swing.JTextField txtFunId;
     public static javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtIdVeiculo;
     private javax.swing.JTextField txtOs;
     private javax.swing.JTextField txtOsDefeito;
     public static javax.swing.JFormattedTextField txtOsValor;

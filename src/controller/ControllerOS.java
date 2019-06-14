@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Funcionario;
+import modelo.OS;
 import modelo.Veiculo;
 import net.proteanit.sql.DbUtils;
 import view.TelaCliente;
@@ -45,6 +46,8 @@ public class ControllerOS {
             // model.addRow(new Object[]{marcaRetorno.getId(), marcaRetorno.getNome()});  
             TelaOrdemServico.cbfuncionario.addItem(funRetorno.getNome());
         }
+      
+        
     }
 
     //Metodo para pesquisar clientes pelo nome com filtro
@@ -91,8 +94,10 @@ public class ControllerOS {
         TelaOrdemServico.cbVeiculo.removeAllItems();        
         for (Veiculo veiculoRetorno : listaVeiculo) {
             // model.addRow(new Object[]{marcaRetorno.getId(), marcaRetorno.getNome()});  
-            TelaOrdemServico.cbVeiculo.addItem(veiculoRetorno.getModelo());
+            TelaOrdemServico.cbVeiculo.addItem(veiculoRetorno.getIdveiculo()+"-"+ veiculoRetorno.getModelo());
         }
+        
+     
     }
     
     //SETA ID
@@ -105,4 +110,30 @@ public class ControllerOS {
         
     }
 
+    //RETORNA ID FUNCIONARIO OS
+    public String idfuncionario(String nome) throws Exception{
+        HttpExemplo http = new HttpExemplo();
+        String chamada = "http://localhost:8090/WebService/rest/os/idFuncionario/"+nome+"";
+        String json = http.sendGet(chamada);
+        
+        return json;
+    }
+    
+    
+    
+    //INSERIR OS
+    public String inserir_os(OS os) throws Exception{
+        HttpExemplo http = new HttpExemplo();
+        String chamada = "http://localhost:8090/WebService/rest/os/adicionar/";
+        Gson gson = new Gson();			
+			java.lang.reflect.Type usuarioType = new TypeToken<OS>() {
+	        }.getType();
+	        
+                    String json = gson.toJson(os, usuarioType);
+                     
+                     http.POST(chamada, json);
+        
+   
+    return json;
+}
 }

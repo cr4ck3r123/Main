@@ -16,6 +16,8 @@ public class OS {
     
     private int idordemservico;
     private int idfuncionario;
+    private String tipo;
+    private String situacao;
     private double total;
     private String defeito;
     private Date data;
@@ -115,6 +117,22 @@ public class OS {
 
     public void setIdpessoa(int idpessoa) {
         this.idpessoa = idpessoa;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
     }
     
     
