@@ -185,9 +185,10 @@ public class HttpExemplo {
     }
 
     
-     void POST(String url, String POST_PARAMS) throws IOException {
+     void POST(String url, String DELETE_PARAMS) throws IOException {
 		
                 URL obj = new URL(url);
+                
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
                 con.setRequestProperty("Content-Type", "application/json");
@@ -197,7 +198,7 @@ public class HttpExemplo {
 		// For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write(POST_PARAMS.getBytes());
+		os.write(DELETE_PARAMS.getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
@@ -224,6 +225,64 @@ public class HttpExemplo {
                 
                 
 	}
+     
+     
+     // HTTP DELETE request
+    void DELETE(String url, String POST_PARAMS) throws Exception {
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("DELETE");
+        
+        //add request header
+        con.setRequestProperty("Content-Type", "application/json");
+        
+        // For POST only - START
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		os.write(POST_PARAMS.getBytes());
+		os.flush();
+		os.close();
+		// For POST only - END
+
+        
+        int responseCode = con.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) { //success
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					con.getInputStream()));
+			String inputLine;
+			StringBuffer response = new StringBuffer();
+
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+
+			// print result
+			System.out.println(response.toString());
+		} else {
+			System.out.println("DELETE request not worked");
+		}
+
+        /*
+        
+       // System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+     
+*/
+    }
   
         //METODO PUT
      void PUT(String url, String POST_PARAMS) throws IOException {

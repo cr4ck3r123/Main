@@ -789,7 +789,6 @@ public class TelaOrdemServico extends javax.swing.JFrame {
             
               // System.out.println("ok");
             
-
         }
         
 
@@ -830,7 +829,7 @@ public class TelaOrdemServico extends javax.swing.JFrame {
                 txtDesconto.setText("0");
                 txtQtde.setText("0");
                 limpaTabela();
-        
+                      
               //  JasperViewer.viewReport(print, false);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);

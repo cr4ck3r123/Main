@@ -30,9 +30,9 @@ public class ControllerCliente {
     public  void listarCliente() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8090/WebService/rest/cliente/listar";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/listaCliente";
 			String json = http.sendGet(chamada);
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                         
                         Usuario u = new Usuario();
                         java.lang.reflect.Type usuarioType = new TypeToken<List<Cliente>>() {}.getType();
@@ -126,9 +126,9 @@ public class ControllerCliente {
                 
                  //METODO DELETAR
                 public void deletarCliente(int id) throws Exception{
-                    String chamada = "http://localhost:8090/WebService/rest/cliente/delete/"+id+"";
+                    String chamada = "https://app-api-restfull.herokuapp.com/api/cliente/"+id+"";
                     HttpExemplo http = new HttpExemplo();
-                    String json = http.sendDelete(chamada);
+                //    String json = http.sendDelete(chamada);
                     
                     
                 }
@@ -137,7 +137,7 @@ public class ControllerCliente {
     //METODO PARA PEGAR DADOS POR ID CLIENTE
                 public Cliente dadosId(int id) throws Exception{
                     
-                    String chamada = "http://localhost:8090/WebService/rest/cliente/pesquisar/"+id+"";
+                    String chamada = "https://app-api-restfull.herokuapp.com/api/cliente/"+id+"";
                     HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                     Gson gson = new Gson();

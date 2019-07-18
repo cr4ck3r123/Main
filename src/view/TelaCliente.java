@@ -44,7 +44,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
         ControllerMarca controllerMarca = new ControllerMarca();
         ControllerModelo controllerModelo = new ControllerModelo();
-
+/*
         try {
             controllerMarca.listarMarca();
               int id = controllerMarca.retornoid();
@@ -52,7 +52,7 @@ public class TelaCliente extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+*/
     }
 
     //SETAR CAMPOS PESSOA ENDEREÇO VEICULO

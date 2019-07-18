@@ -27,7 +27,7 @@ public class ControllerEndereco {
     		public String inserirEndereco(Endereco dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8090/WebService/rest/endereco/adicionar";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/cliente";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						

@@ -131,10 +131,14 @@ public class ControllerServico {
                 }
     
    //METODO DELETAR
-                public void deletar(int id) throws Exception{
-                    String chamada = "http://localhost:8090/WebService/rest/servico/delete/"+id+"";
+                public void deletar(Usuario dados) throws Exception{
+                    String chamada = "http://localhost:8090/WebService/rest/servico/delete/";
                     HttpExemplo http = new HttpExemplo();
-                    String json = http.sendDelete(chamada);
+                    Gson gson = new Gson();
+                    java.lang.reflect.Type usuarioType = new TypeToken<Servico>() {
+	        }.getType();
+                    String json = gson.toJson(dados, usuarioType);
+                     http.DELETE(chamada, json);
                     
                     
                 }

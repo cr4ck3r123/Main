@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Servico;
+import modelo.Usuario;
 
 /**
  *
@@ -387,10 +388,14 @@ public class TelaServico extends javax.swing.JFrame {
        int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente exclui este serviço", "Atenção!!!", JOptionPane.YES_NO_OPTION);
        
         ControllerServico controllerServico = new ControllerServico();
+        Usuario user = new Usuario();
         
-            if (resposta == JOptionPane.YES_OPTION){
+        
+            if (resposta == JOptionPane.YES_OPTION){        
+                
+                
         try {
-            controllerServico.deletar(Integer.parseInt(txtId.getText()));
+         //  controllerServico.deletar(Integer.parseInt(txtId.getText()));
             limparCampos();
             listar();
         } catch (Exception ex) {

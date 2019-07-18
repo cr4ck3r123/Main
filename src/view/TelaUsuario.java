@@ -26,7 +26,6 @@ public class TelaUsuario extends javax.swing.JFrame {
      */
     public TelaUsuario() throws Exception {
         initComponents();
-        id();
         tabela();
        
     }  
@@ -507,9 +506,15 @@ txtConfSenha.setText(null);        // TODO add your handling code here:
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
        
         int id = Integer.parseInt(txtId.getText());
-        ControllerUsuario user = new ControllerUsuario();
+        ControllerUsuario ctrlUser = new ControllerUsuario();
+        Usuario user = new Usuario();
         try {
-             user.deletarUsuario(id);
+            user.setId(Integer.parseInt(txtId.getText()));
+            user.setNome(txtNome.getText());
+            user.setLogin(txtLogin.getText());
+            user.setSenha(txtSenha.getText());
+            user.setEmail(txtEmail.getText());
+             ctrlUser.deletarUsuario(user);
              tabela();
              limpaCampos();
              desabilitarCampos();
