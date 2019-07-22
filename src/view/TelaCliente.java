@@ -38,21 +38,25 @@ public class TelaCliente extends javax.swing.JFrame {
 
     public TelaCliente() {
         initComponents();
-
+        
+      
         tabelas.setEnabledAt(1, false);
         tabelas.setEnabledAt(2, false);
 
         ControllerMarca controllerMarca = new ControllerMarca();
         ControllerModelo controllerModelo = new ControllerModelo();
-/*
+
         try {
             controllerMarca.listarMarca();
-              int id = controllerMarca.retornoid();
-           controllerModelo.listarModelo(id);
+         int id = controllerMarca.retornoid();
+         controllerModelo.listarModelo(id);
+         
+          ControllerCliente controllerCliente = new ControllerCliente();
+       controllerCliente.retornoid();
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-*/
+
     }
 
     //SETAR CAMPOS PESSOA ENDEREÇO VEICULO
@@ -66,7 +70,7 @@ public class TelaCliente extends javax.swing.JFrame {
         int row = tblCliente.getSelectedRow();
         int id = Integer.parseInt(tblCliente.getValueAt(row, 0).toString());
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-
+       
         Cliente c = new Cliente();
         ControllerCliente cliente = new ControllerCliente();
         c = cliente.dadosId(id);
@@ -81,6 +85,9 @@ public class TelaCliente extends javax.swing.JFrame {
         tblCliente.setEnabled(true);
         txtPesq.setEnabled(false);
         btnPesq.setEnabled(false);
+        btnEditar.setEnabled(true);
+        btnRemover.setEnabled(true);
+        btnInserir.setEnabled(false);
 
         Endereco e = new Endereco();
         ControllerEndereco controllerEndereco = new ControllerEndereco();
@@ -94,9 +101,9 @@ public class TelaCliente extends javax.swing.JFrame {
         txtBairro.setText(e.getBairro());
         txtCidade.setText(e.getLocalidade());
         cbEstado.setSelectedItem(e.getUf());
-        controllerEndereco.listarEndereco(id);
+        controllerEndereco.listarEndereco(e.getId());
         System.out.print("------------>" + e.getId() + e.getBairro() + "\n");
-
+/*
         ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
         controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
         Veiculo v = new Veiculo();
@@ -111,7 +118,7 @@ public class TelaCliente extends javax.swing.JFrame {
         txtPlaca.setText(v.getPlaca());
         txtKm.setText(String.valueOf(v.getKm()));
         btnAddVeiculo.setEnabled(true);
-
+*/
     }
 
     //METODO SETAR CAMPOS VEICULO
@@ -137,7 +144,7 @@ public class TelaCliente extends javax.swing.JFrame {
     
 
 
-    //SETAR ID 
+   //SETAR ID 
     public void id() {
         ControllerCliente controllerCliente = new ControllerCliente();
         try {
@@ -222,9 +229,9 @@ public class TelaCliente extends javax.swing.JFrame {
 
         btnPesq.setEnabled(false);
         btnPesqVeiculo.setEnabled(true);
-        btnEditar.setEnabled(true);
-        btnInserir.setEnabled(false);
-        btnRemover.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnInserir.setEnabled(true);
+        btnRemover.setEnabled(false);
         btnNovo.setEnabled(false);
     }
 
@@ -364,10 +371,10 @@ public class TelaCliente extends javax.swing.JFrame {
     void tabela() throws Exception {
         ControllerCliente controllerCliente = new ControllerCliente();
         controllerCliente.listarCliente();
-        ControllerEndereco controllerEndereco = new ControllerEndereco();
-        controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));
-        ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
-        controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
+        //ControllerEndereco controllerEndereco = new ControllerEndereco();
+        //controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));
+        //ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
+        //controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
 
     }
 
@@ -452,9 +459,6 @@ public class TelaCliente extends javax.swing.JFrame {
     public Endereco inserirEndereco() {
 
         Endereco endereco = new Endereco();
-        int id = Integer.parseInt(idEnd.getText());
-        int num = Integer.parseInt(txtId.getText());
-        endereco.setId(id);
         endereco.setLogradouro(txtRua.getText().toUpperCase());
         endereco.setNumero(Integer.parseInt(txtNum.getText()));
         endereco.setComplemento(txtComplemento.getText().toUpperCase());
@@ -462,7 +466,7 @@ public class TelaCliente extends javax.swing.JFrame {
         endereco.setBairro(txtBairro.getText().toUpperCase());
         endereco.setLocalidade(txtCidade.getText().toUpperCase());
         endereco.setUf(cbEstado.getSelectedItem().toString().toUpperCase());
-        endereco.setPessoa_idpessoa(num);
+        endereco.setPessoa_idpessoa(Integer.parseInt(idEnd.getText()));
         return endereco;
     }
 
@@ -480,7 +484,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     controllerCliente.inserir(client);
                     JOptionPane.showMessageDialog(rootPane, "Usuario inserido com sucesso!");
                     tabela();
-                    btnInsert = 1;
+                   
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
                     // JOptionPane.showMessageDialog(rootPane, "Data Invalida!");
@@ -492,6 +496,7 @@ public class TelaCliente extends javax.swing.JFrame {
             }
 
         }
+        btnInsert = 1;
         return btnInsert;
     }
 
@@ -1182,8 +1187,7 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1452,18 +1456,21 @@ public class TelaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-
+              
         if (btnInsert == 0) {
+            
             inserePessoa();
+            
             tabelas.setSelectedIndex(1);
             tabelas.setEnabledAt(0, false);
             tabelas.setEnabledAt(1, true);
+            btnInsert = 1;
 
         } else if (btnInsert == 1) {
             insereEndereco();
 
         } else {
-            insereVeiculo();
+           // insereVeiculo();
 
             btnInsert = 0;
             limpar();
@@ -1483,9 +1490,12 @@ public class TelaCliente extends javax.swing.JFrame {
             btnNovo.setEnabled(false);
             btnRemover.setEnabled(false);
             btnEditar.setEnabled(false);
+         
+            
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1530,10 +1540,10 @@ public class TelaCliente extends javax.swing.JFrame {
 
         try {
             ControllerMarca marca = new ControllerMarca();
-            int id = marca.retornoid();
+/*            int id = marca.retornoid();
             ControllerModelo controllerModelo = new ControllerModelo();
             controllerModelo.listarModelo(id);
-
+*/
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1594,9 +1604,12 @@ public class TelaCliente extends javax.swing.JFrame {
 
         if (resposta == JOptionPane.YES_OPTION) {
             int id = Integer.parseInt(txtId.getText());
-            ControllerCliente cliente = new ControllerCliente();
+            ControllerCliente controlerCliente = new ControllerCliente();
+            Cliente cli = new Cliente();
+            
             try {
-                cliente.deletarCliente(id);
+                cli = this.inserir();
+                controlerCliente.deletarCliente(cli);
                 tabela();
                 limpar();
                 tabelas.setEnabledAt(0, true);
@@ -1649,6 +1662,8 @@ public class TelaCliente extends javax.swing.JFrame {
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         try {
             setarCampos();
+            
+            btnRemover.setEnabled(true);
 
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);

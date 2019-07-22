@@ -27,7 +27,7 @@ public class ControllerMarca {
                 public  void listarMarca() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8090/WebService/rest/veiculo/listarMarcas";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/listaMarca";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -53,7 +53,7 @@ public class ControllerMarca {
                 public int retornoid() throws Exception{
                     
                     String nome = cbMarca.getSelectedItem().toString();
-                    String chamada = "http://localhost:8090/WebService/rest/veiculo/marca/"+nome+"/";
+                    String chamada = "https://app-api-restfull.herokuapp.com/api/marcaNome/"+nome+"/";
 		    HttpExemplo http = new HttpExemplo();
                     String json = http.sendGet(chamada);
                                       
@@ -67,5 +67,5 @@ public class ControllerMarca {
                     return id;
                 }
     
-   
+  
 }

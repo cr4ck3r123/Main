@@ -25,7 +25,7 @@ public class ControllerModelo {
                     
                      
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8090/WebService/rest/veiculo/listarModelos/"+id+"";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/modelo/"+id+"";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         

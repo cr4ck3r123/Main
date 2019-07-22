@@ -1098,7 +1098,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
             int id = Integer.parseInt(txtId.getText());
             ControllerCliente cliente = new ControllerCliente();
             try {
-                cliente.deletarCliente(id);
+//                cliente.deletarCliente(id);
                 tabela();
                 limpar();
                 tabelas.setEnabledAt(0, true);

@@ -185,10 +185,9 @@ public class HttpExemplo {
     }
 
     
-     void POST(String url, String DELETE_PARAMS) throws IOException {
+     void POST(String url, String POST_PARAMS) throws IOException {
 		
                 URL obj = new URL(url);
-                
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
                 con.setRequestProperty("Content-Type", "application/json");
@@ -198,7 +197,7 @@ public class HttpExemplo {
 		// For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write(DELETE_PARAMS.getBytes());
+		os.write(POST_PARAMS.getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
@@ -228,7 +227,7 @@ public class HttpExemplo {
      
      
      // HTTP DELETE request
-    void DELETE(String url, String POST_PARAMS) throws Exception {
+    void DELETE(String url, String DELETE_PARAMS) throws Exception {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -242,7 +241,7 @@ public class HttpExemplo {
         // For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write(POST_PARAMS.getBytes());
+		os.write(DELETE_PARAMS.getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
@@ -261,7 +260,7 @@ public class HttpExemplo {
 			in.close();
 
 			// print result
-			System.out.println(response.toString());
+			System.out.println(response.toString()+"Deletado com sucesso");
 		} else {
 			System.out.println("DELETE request not worked");
 		}
@@ -285,7 +284,7 @@ public class HttpExemplo {
     }
   
         //METODO PUT
-     void PUT(String url, String POST_PARAMS) throws IOException {
+     void PUT(String url, String PUT_PARAMS) throws IOException {
 		
                 URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -297,13 +296,13 @@ public class HttpExemplo {
 		// For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write(POST_PARAMS.getBytes());
+		os.write(PUT_PARAMS.getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
 
 		int responseCode = con.getResponseCode();
-		System.out.println("POST Response Code :: " + responseCode);
+		System.out.println("PUT Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { //success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
