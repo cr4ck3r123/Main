@@ -35,7 +35,8 @@ public class TelaCliente extends javax.swing.JFrame {
      * Creates new form TelaCliente
      */
     public int btnInsert = 0;
-
+    public int idCliente = 0;
+    
     public TelaCliente() {
         initComponents();
         
@@ -103,7 +104,7 @@ public class TelaCliente extends javax.swing.JFrame {
         cbEstado.setSelectedItem(e.getUf());
         controllerEndereco.listarEndereco(e.getId());
         System.out.print("------------>" + e.getId() + e.getBairro() + "\n");
-/*
+
         ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
         controllerVeiculo.listarVeiculo(Integer.parseInt(txtId.getText()));
         Veiculo v = new Veiculo();
@@ -118,7 +119,7 @@ public class TelaCliente extends javax.swing.JFrame {
         txtPlaca.setText(v.getPlaca());
         txtKm.setText(String.valueOf(v.getKm()));
         btnAddVeiculo.setEnabled(true);
-*/
+
     }
 
     //METODO SETAR CAMPOS VEICULO
@@ -145,15 +146,15 @@ public class TelaCliente extends javax.swing.JFrame {
 
 
    //SETAR ID 
-    public void id() {
+    public int id() throws Exception {
         ControllerCliente controllerCliente = new ControllerCliente();
-        try {
-            String id = controllerCliente.retornoid();
-            txtId.setText(id);
-                
-        } catch (Exception ex) {
-            Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        int id = controllerCliente.retornoid();
+            
+            txtId.setText(String.valueOf(id+1));
+       
+       
+            
+        return id;
     }
 
     // IDENDERECO
@@ -315,7 +316,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
         btnInserir.setEnabled(false);
         btnEditar.setEnabled(false);
-        btnAddVeiculo.setEnabled(false);
+        btnAddVeiculo.setEnabled(true);
         btnPesq.setEnabled(true);
         btnNovo.setEnabled(true);
 
@@ -392,6 +393,8 @@ public class TelaCliente extends javax.swing.JFrame {
         LocalDate hoje = LocalDate.of(Integer.parseInt(dataSeparada[2]), Integer.parseInt(dataSeparada[1]), Integer.parseInt(dataSeparada[0]));
 
         Cliente cliente = new Cliente();
+        cliente.setId(Integer.parseInt(txtId.getText()));
+        System.out.print(Integer.parseInt(txtId.getText()));
         cliente.setNome(txtNome.getText().toUpperCase());
         cliente.setDataNasc(Date.valueOf(hoje));
         cliente.setCpf(txtCpf.getText().toUpperCase());
@@ -456,7 +459,7 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     //METODO INSERIR ENDERECO JSON
-    public Endereco inserirEndereco() {
+    public Endereco inserirEndereco() throws Exception {
 
         Endereco endereco = new Endereco();
         endereco.setLogradouro(txtRua.getText().toUpperCase());
@@ -466,7 +469,8 @@ public class TelaCliente extends javax.swing.JFrame {
         endereco.setBairro(txtBairro.getText().toUpperCase());
         endereco.setLocalidade(txtCidade.getText().toUpperCase());
         endereco.setUf(cbEstado.getSelectedItem().toString().toUpperCase());
-        endereco.setPessoa_idpessoa(Integer.parseInt(idEnd.getText()));
+        idCliente = id();
+        endereco.setPessoa_idpessoa(idCliente);
         return endereco;
     }
 
@@ -1304,7 +1308,6 @@ public class TelaCliente extends javax.swing.JFrame {
 
         btnAddVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         btnAddVeiculo.setText("ADD");
-        btnAddVeiculo.setEnabled(false);
         btnAddVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddVeiculoActionPerformed(evt);
@@ -1446,7 +1449,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addComponent(btnNovo)
                     .addComponent(btnEditar)
                     .addComponent(btnRemover)
-                    .addComponent(btnInserir))
+                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabelas))
         );
@@ -1470,7 +1473,7 @@ public class TelaCliente extends javax.swing.JFrame {
             insereEndereco();
 
         } else {
-           // insereVeiculo();
+            insereVeiculo();
 
             btnInsert = 0;
             limpar();
@@ -1485,6 +1488,7 @@ public class TelaCliente extends javax.swing.JFrame {
             ativarTodosCampos();
             id();
             idEndereco();
+            idCliente = Integer.parseInt(txtId.getText());
             //idVeiculo();
             btnInserir.setEnabled(true);
             btnNovo.setEnabled(false);
@@ -1540,10 +1544,10 @@ public class TelaCliente extends javax.swing.JFrame {
 
         try {
             ControllerMarca marca = new ControllerMarca();
-/*            int id = marca.retornoid();
+           int id = marca.retornoid();
             ControllerModelo controllerModelo = new ControllerModelo();
             controllerModelo.listarModelo(id);
-*/
+
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

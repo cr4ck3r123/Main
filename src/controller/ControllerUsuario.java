@@ -117,8 +117,10 @@ public class ControllerUsuario {
         String chamada = "https://app-api-restfull.herokuapp.com/api/usuario/";
         HttpExemplo http = new HttpExemplo();
         Gson gson = new Gson();
+        
         java.lang.reflect.Type usuarioType = new TypeToken<Usuario>() {
         }.getType();
+        
          String json = gson.toJson(dados, usuarioType);
          http.DELETE(chamada, json);
 

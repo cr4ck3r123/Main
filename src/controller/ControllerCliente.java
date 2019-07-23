@@ -68,7 +68,7 @@ public class ControllerCliente {
         }.getType();
 
         String json = gson.toJson(dados, usuarioType);
-        System.out.print(json);
+        System.out.print("----->"+json);
         http.POST(chamada, json);
 
         return msg;
@@ -112,7 +112,7 @@ public class ControllerCliente {
 
     //METODO DELETAR
     public void deletarCliente(Cliente dados) throws Exception {
-        String chamada = "https://app-api-restfull.herokuapp.com/api/cliente/";
+        String chamada = "https://app-api-restfull.herokuapp.com/api/cliente";
         HttpExemplo http = new HttpExemplo();
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
@@ -164,7 +164,7 @@ public class ControllerCliente {
     }
 
     //METODO PEGAR ULTIMO ID
-    public String retornoid() throws Exception {
+    public int retornoid() throws Exception {
 
         String chamada = "https://app-api-restfull.herokuapp.com/api/listaCliente/";
         HttpExemplo http = new HttpExemplo();
@@ -178,17 +178,18 @@ public class ControllerCliente {
 
         ArrayList<Integer> meuArrayList = new ArrayList<Integer>();
         int x = 0;
+        
         for (Cliente clienteRetorno : listaCliente) {
 
             int id = clienteRetorno.getId();
-
+            
             if (x < id) {
                 x = id;
             }
 
         }
-        System.out.print("Ultimo id" + x);
-        return String.valueOf(x + 1);
+        System.out.print("Ultimo id" + x+"\n");
+        return x;
     }
 
 }

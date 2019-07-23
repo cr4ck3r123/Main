@@ -25,7 +25,7 @@ public class ControllerModelo {
                     
                      
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "https://app-api-restfull.herokuapp.com/api/modelo/"+id+"";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/listaModelo";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         
@@ -43,8 +43,9 @@ public class ControllerModelo {
                           cbModelo.removeAllItems();
 		         for (Modelo marcaRetorno : listaModelo) {  
                            // model.addRow(new Object[]{marcaRetorno.getId(), marcaRetorno.getNome()});  
+                             if(id == (marcaRetorno.getIdmarca())){
                              cbModelo.addItem(marcaRetorno.getNome());
-                             
+                             }
 		         } 
                         
                       return 1;

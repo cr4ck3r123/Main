@@ -227,7 +227,7 @@ public class HttpExemplo {
      
      
      // HTTP DELETE request
-    void DELETE(String url, String DELETE_PARAMS) throws Exception {
+    void DELETE(String url, String POST_PARAMS) throws Exception {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -241,7 +241,7 @@ public class HttpExemplo {
         // For POST only - START
 		con.setDoOutput(true);
 		OutputStream os = con.getOutputStream();
-		os.write(DELETE_PARAMS.getBytes());
+		os.write(POST_PARAMS.getBytes());
 		os.flush();
 		os.close();
 		// For POST only - END
