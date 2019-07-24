@@ -162,6 +162,7 @@ public class ControllerVeiculo {
 
         /* Itera a lista, criando o objeto "Cliente" apenas para pegar suas Strings.*/
                         // SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
+        model.setNumRows(0);
         for (Veiculo veiculo : listaVeiculo) {
 
             if (idPessoa == veiculo.getPessoa_idpessoa()) {

@@ -19,6 +19,7 @@ import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Endereco;
 import modelo.Cliente;
 import modelo.Marca;
@@ -297,8 +298,8 @@ public class TelaCliente extends javax.swing.JFrame {
         txtComplemento.setText(null);
         txtCep.setText(null);
         txtBairro.setText(null);
-        txtCidade.setText(null);
-
+        txtCidade.setText(null);        
+       
         //LIMPA DADOS VEICULO
         // cbMarca.setSelectedItem(null);
         cbMarca.setEnabled(false);
@@ -350,6 +351,8 @@ public class TelaCliente extends javax.swing.JFrame {
         lbCidade.setEnabled(false);
         txtCidade.setEnabled(false);
         txtCidade.setText(null);
+        tbEndereco.removeAll();
+        
     }
 
     //ABILITA VEICULO
@@ -487,7 +490,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 try {
                     controllerCliente.inserir(client);
                     JOptionPane.showMessageDialog(rootPane, "Usuario inserido com sucesso!");
-                    tabela();
+                   
                    
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -551,7 +554,7 @@ public class TelaCliente extends javax.swing.JFrame {
         veiculo.setPlaca(txtPlaca.getText().toUpperCase());
         veiculo.setKm(Double.parseDouble(txtKm.getText()));
         //Integer.parseInt(txtId.getText()
-        veiculo.setPessoa_idpessoa(Integer.parseInt(txtId.getText()));
+        veiculo.setPessoa_idpessoa(idCliente);
 
         return veiculo;
     }
@@ -1308,6 +1311,7 @@ public class TelaCliente extends javax.swing.JFrame {
 
         btnAddVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
         btnAddVeiculo.setText("ADD");
+        btnAddVeiculo.setEnabled(false);
         btnAddVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddVeiculoActionPerformed(evt);
@@ -1445,11 +1449,12 @@ public class TelaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovo)
-                    .addComponent(btnEditar)
-                    .addComponent(btnRemover)
-                    .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnInserir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNovo)
+                        .addComponent(btnEditar)
+                        .addComponent(btnRemover)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabelas))
         );
@@ -1468,11 +1473,12 @@ public class TelaCliente extends javax.swing.JFrame {
             tabelas.setEnabledAt(0, false);
             tabelas.setEnabledAt(1, true);
             btnInsert = 1;
-
+            
         } else if (btnInsert == 1) {
             insereEndereco();
-
+           
         } else {
+           
             insereVeiculo();
 
             btnInsert = 0;
@@ -1609,12 +1615,12 @@ public class TelaCliente extends javax.swing.JFrame {
         if (resposta == JOptionPane.YES_OPTION) {
             int id = Integer.parseInt(txtId.getText());
             ControllerCliente controlerCliente = new ControllerCliente();
+            ControllerEndereco controllerEndereco = new ControllerEndereco();
             Cliente cli = new Cliente();
             
             try {
                 cli = this.inserir();
-                controlerCliente.deletarCliente(cli);
-                tabela();
+               
                 limpar();
                 tabelas.setEnabledAt(0, true);
                 tabelas.setEnabledAt(1, false);
