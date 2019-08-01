@@ -166,6 +166,22 @@ public class TelaCliente extends javax.swing.JFrame {
         String id = controllerEndereco.retornoid();
         idEnd.setText(id);
     }
+    
+    public void limpaTabela(){
+        DefaultTableModel tblEnd = (DefaultTableModel)tbEndereco.getModel();
+        DefaultTableModel tblVeic = (DefaultTableModel)tbVeiculo.getModel();
+        if (tblEnd.getRowCount() > 0){
+            for (int i=0;i<=tblEnd.getRowCount();i++){
+                tblEnd.removeRow(i);
+            }            
+        }
+         if (tblVeic.getRowCount() > 0){
+            for (int i=0;i<=tblVeic.getRowCount();i++){
+                tblVeic.removeRow(i);
+            }            
+        }
+
+    }
 
     //SETAR ID VEICULO
     public void idVeiculo() {
@@ -1640,8 +1656,8 @@ public class TelaCliente extends javax.swing.JFrame {
 
         try {
             editar();
-            tabela();
-
+            //tabela();
+            limpaTabela();
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
 
