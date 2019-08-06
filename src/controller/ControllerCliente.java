@@ -68,7 +68,7 @@ public class ControllerCliente {
         }.getType();
 
         String json = gson.toJson(dados, usuarioType);
-       
+        System.out.print("----->"+json);
         http.POST(chamada, json);
 
         return msg;
@@ -90,7 +90,22 @@ public class ControllerCliente {
 
         http.POST(chamada, json);
 
-	
+		  //  http.sendPost(chamada, json, "POST");
+	   /*
+         HttpExemplo http = new HttpExemplo();
+         Gson g = new Gson();
+         Usuario u = new Usuario();
+         Type usuarioType = new TypeToken<Usuario>() {
+         }.getType();
+	        
+         u.setLogin("programatche");
+         u.setEmail("aaa.com");
+         u.setSenha("4312");
+         String json = g.toJson(u, usuarioType);
+         String url = "http://localhost:8080/WebServiceChat/rest/servicos/inserir/";
+	        
+         http.sendPost(url, json, "PUT");
+         */
         return msg;
 
     }

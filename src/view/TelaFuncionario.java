@@ -1066,8 +1066,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
         try {
             ativarTodosCampos();
-            id();
-            idEndereco();
+           // id();
+          //  idEndereco();
             //idVeiculo();
             btnInserir.setEnabled(true);
             btnNovo.setEnabled(false);

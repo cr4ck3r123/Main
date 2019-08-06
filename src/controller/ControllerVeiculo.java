@@ -75,21 +75,40 @@ public class ControllerVeiculo {
         
     }
         //METODO PARA PEGAR DADOS POR ID VEICULO
-    public Veiculo dadosIdVeiculo(int id) throws Exception {
+    public Veiculo dadosIdVeiculo(int idVeiculo) throws Exception {
 
-        String chamada = "http://localhost:8090/WebService/rest/veiculo/idVeiculo/" + id + "";
+        String chamada = "https://app-api-restfull.herokuapp.com/api/listaVeiculo";
         HttpExemplo http = new HttpExemplo();
         String json = http.sendGet(chamada);
         Gson gson = new Gson();
 
-        java.lang.reflect.Type usuarioType = new TypeToken<Veiculo>() {
+        java.lang.reflect.Type usuarioType = new TypeToken<List<Veiculo>>() {
         }.getType();
 
-        Veiculo v = new Veiculo();
-        v = gson.fromJson(json, usuarioType);
+        List<Veiculo> listaVeiculo = gson.fromJson(json, usuarioType);
 
+        Veiculo v = new Veiculo();       
+     
+        for (Veiculo veiculo : listaVeiculo) {
+
+            if (idVeiculo == veiculo.getIdveiculo()) {
+                    
+                veiculo.getMarca();
+                veiculo.getModelo();
+                veiculo.getKm();
+                veiculo.getAno();
+                veiculo.getPlaca();
+                veiculo.getCor();
+                veiculo.getIdveiculo();
+               
+               return v = veiculo;             
+            
+            }
+        }
         return v;
     }
+
+    
 
 //                  //METODO LISTAR
 //                public  void listarVeiculo(int id) throws Exception{
@@ -162,7 +181,6 @@ public class ControllerVeiculo {
 
         /* Itera a lista, criando o objeto "Cliente" apenas para pegar suas Strings.*/
                         // SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
-        model.setNumRows(0);
         for (Veiculo veiculo : listaVeiculo) {
 
             if (idPessoa == veiculo.getPessoa_idpessoa()) {

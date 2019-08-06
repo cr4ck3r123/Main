@@ -20,8 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Endereco;
 import modelo.Cliente;
+import modelo.Endereco;
 import modelo.Marca;
 import modelo.Usuario;
 import modelo.Veiculo;
@@ -57,6 +57,23 @@ public class TelaCliente extends javax.swing.JFrame {
        controllerCliente.retornoid();
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void limpaTabela(){
+        DefaultTableModel tblEnd = (DefaultTableModel)tbEndereco.getModel();
+        DefaultTableModel tblVeic = (DefaultTableModel)tbVeiculo.getModel();
+        
+        if (tblEnd.getRowCount() > 0){
+            for (int i=0;i<=tblEnd.getRowCount();i++){
+                tblEnd.removeRow(i);
+            }            
+        }
+         if (tblVeic.getRowCount() > 0){
+            for (int i=0;i<=tblVeic.getRowCount();i++){
+                tblVeic.removeRow(i);
+            }            
         }
 
     }
@@ -120,9 +137,13 @@ public class TelaCliente extends javax.swing.JFrame {
         txtPlaca.setText(v.getPlaca());
         txtKm.setText(String.valueOf(v.getKm()));
         btnAddVeiculo.setEnabled(true);
+         btnRemVeiculo.setEnabled(true);
 
     }
 
+    
+    
+    
     //METODO SETAR CAMPOS VEICULO
     void setarVeiculo() throws Exception {
 
@@ -165,22 +186,6 @@ public class TelaCliente extends javax.swing.JFrame {
 
         String id = controllerEndereco.retornoid();
         idEnd.setText(id);
-    }
-    
-    public void limpaTabela(){
-        DefaultTableModel tblEnd = (DefaultTableModel)tbEndereco.getModel();
-        DefaultTableModel tblVeic = (DefaultTableModel)tbVeiculo.getModel();
-        if (tblEnd.getRowCount() > 0){
-            for (int i=0;i<=tblEnd.getRowCount();i++){
-                tblEnd.removeRow(i);
-            }            
-        }
-         if (tblVeic.getRowCount() > 0){
-            for (int i=0;i<=tblVeic.getRowCount();i++){
-                tblVeic.removeRow(i);
-            }            
-        }
-
     }
 
     //SETAR ID VEICULO
@@ -314,8 +319,8 @@ public class TelaCliente extends javax.swing.JFrame {
         txtComplemento.setText(null);
         txtCep.setText(null);
         txtBairro.setText(null);
-        txtCidade.setText(null);        
-       
+        txtCidade.setText(null);
+
         //LIMPA DADOS VEICULO
         // cbMarca.setSelectedItem(null);
         cbMarca.setEnabled(false);
@@ -333,7 +338,6 @@ public class TelaCliente extends javax.swing.JFrame {
 
         btnInserir.setEnabled(false);
         btnEditar.setEnabled(false);
-        btnAddVeiculo.setEnabled(true);
         btnPesq.setEnabled(true);
         btnNovo.setEnabled(true);
 
@@ -341,7 +345,7 @@ public class TelaCliente extends javax.swing.JFrame {
         tabelas.setEnabledAt(1, false);
         tabelas.setEnabledAt(2, false);
         tabelas.setSelectedIndex(0);
-
+        
     }
 
     //DESABILITA ENDEREÇO
@@ -367,8 +371,6 @@ public class TelaCliente extends javax.swing.JFrame {
         lbCidade.setEnabled(false);
         txtCidade.setEnabled(false);
         txtCidade.setText(null);
-        tbEndereco.removeAll();
-        
     }
 
     //ABILITA VEICULO
@@ -506,7 +508,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 try {
                     controllerCliente.inserir(client);
                     JOptionPane.showMessageDialog(rootPane, "Usuario inserido com sucesso!");
-                   
+                    tabela();
                    
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -538,7 +540,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     controllerEndereco.inserirEndereco(endereco);
                     JOptionPane.showMessageDialog(rootPane, "Endereço inserido com sucesso!!!");
                     limpaEndereco();
-                    //   tabela();
+                  
 
                 } catch (ParseException ex) {
                     Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -557,9 +559,28 @@ public class TelaCliente extends javax.swing.JFrame {
         return btnInsert;
 
     }
+    
+     //METODO INSERIR NOVAMENTE
+    public Veiculo inserirVeiculoNovamente() {
 
-    //METODO INSERIR ENDERECO JSON
-    public Veiculo inserirVeiculo() {
+        int row = tblCliente.getSelectedRow();
+        int id = Integer.parseInt(tblCliente.getValueAt(row, 0).toString());
+        Veiculo veiculo = new Veiculo();
+
+        veiculo.setMarca(cbMarca.getSelectedItem().toString().toUpperCase());
+        veiculo.setModelo(cbModelo.getSelectedItem().toString().toUpperCase());
+        veiculo.setAno(cbAno.getText());
+        veiculo.setCor(txtCor.getText().toUpperCase());
+        veiculo.setPlaca(txtPlaca.getText().toUpperCase());
+        veiculo.setKm(Double.parseDouble(txtKm.getText()));
+        //Integer.parseInt(txtId.getText()
+        veiculo.setPessoa_idpessoa(id);
+
+        return veiculo;
+    }
+
+    //METODO CRIAR OBJETO VEICULO
+    public Veiculo NewVeiculo() {
 
         Veiculo veiculo = new Veiculo();
 
@@ -576,7 +597,7 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     //INSERE VEICULO
-    int insereVeiculo() {
+    int insereNewVeiculo() {
 
         if (cbAno.getText().equals("") || txtPlaca.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Atenção preencha todos os campos!!!");
@@ -585,11 +606,41 @@ public class TelaCliente extends javax.swing.JFrame {
             try {
                 Veiculo veiculo = new Veiculo();
                 ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
-                veiculo = inserirVeiculo();
+                veiculo = NewVeiculo();
                 try {
                     controllerVeiculo.inserirVeiculo(veiculo);
                     JOptionPane.showMessageDialog(rootPane, "Veiculo inserido com sucesso!!!");
-                    tabela();
+                    
+                    tabelas.setSelectedIndex(0);
+                    tabelas.setEnabledAt(1, false);
+                    tabelas.setEnabledAt(2, false);
+                } catch (ParseException ex) {
+                    Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return btnInsert;
+
+    }
+    
+     //INSERE VEICULO
+    int insereMaisVeiculo() {
+
+        if (cbAno.getText().equals("") || txtPlaca.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Atenção preencha todos os campos!!!");
+
+        } else {
+            try {
+                Veiculo veiculo = new Veiculo();
+                ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
+                veiculo = inserirVeiculoNovamente();
+                try {
+                    controllerVeiculo.inserirVeiculo(veiculo);
+                    JOptionPane.showMessageDialog(rootPane, "Veiculo inserido com sucesso!!!");
+                    
                     tabelas.setSelectedIndex(0);
                     tabelas.setEnabledAt(1, false);
                     tabelas.setEnabledAt(2, false);
@@ -756,6 +807,7 @@ public class TelaCliente extends javax.swing.JFrame {
         lbModelo = new javax.swing.JLabel();
         cbAno = new javax.swing.JTextField();
         btnAddVeiculo = new javax.swing.JButton();
+        btnRemVeiculo = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -977,7 +1029,7 @@ public class TelaCliente extends javax.swing.JFrame {
                                         .addGap(334, 334, 334)
                                         .addComponent(lbDataNasc))
                                     .addComponent(txtEmail))
-                                .addGap(0, 34, Short.MAX_VALUE))))
+                                .addGap(0, 45, Short.MAX_VALUE))))
                     .addGroup(clienteLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -991,7 +1043,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addGroup(clienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                             .addGroup(clienteLayout.createSequentialGroup()
                                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(clienteLayout.createSequentialGroup()
@@ -1168,7 +1220,7 @@ public class TelaCliente extends javax.swing.JFrame {
                                     .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbCep)
                                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 27, Short.MAX_VALUE)))
+                        .addGap(0, 80, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         enderecoLayout.setVerticalGroup(
@@ -1210,7 +1262,7 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1325,12 +1377,23 @@ public class TelaCliente extends javax.swing.JFrame {
 
         cbAno.setEnabled(false);
 
+        btnAddVeiculo.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
         btnAddVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/add.png"))); // NOI18N
-        btnAddVeiculo.setText("ADD");
+        btnAddVeiculo.setText("ADICIONAR");
         btnAddVeiculo.setEnabled(false);
         btnAddVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddVeiculoActionPerformed(evt);
+            }
+        });
+
+        btnRemVeiculo.setFont(new java.awt.Font("Ubuntu", 0, 12)); // NOI18N
+        btnRemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete-icon.png"))); // NOI18N
+        btnRemVeiculo.setText("REMOVER");
+        btnRemVeiculo.setEnabled(false);
+        btnRemVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemVeiculoActionPerformed(evt);
             }
         });
 
@@ -1348,31 +1411,8 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(veiculoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                         .addGap(11, 11, 11))
-                    .addGroup(veiculoLayout.createSequentialGroup()
-                        .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(veiculoLayout.createSequentialGroup()
-                                .addComponent(lbPesq2)
-                                .addGap(0, 289, Short.MAX_VALUE))
-                            .addComponent(txtPesqEnd1))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesqVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(veiculoLayout.createSequentialGroup()
-                        .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPlaca, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(veiculoLayout.createSequentialGroup()
-                                .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAddVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(veiculoLayout.createSequentialGroup()
-                                .addComponent(lbKm)
-                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(veiculoLayout.createSequentialGroup()
                         .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(veiculoLayout.createSequentialGroup()
@@ -1398,7 +1438,31 @@ public class TelaCliente extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lbNum1))
                                     .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(veiculoLayout.createSequentialGroup()
+                        .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(veiculoLayout.createSequentialGroup()
+                                .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(veiculoLayout.createSequentialGroup()
+                                        .addComponent(lbPesq2)
+                                        .addGap(0, 289, Short.MAX_VALUE))
+                                    .addComponent(txtPesqEnd1))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPesqVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(veiculoLayout.createSequentialGroup()
+                                .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbPlaca)
+                                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(veiculoLayout.createSequentialGroup()
+                                        .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnAddVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnRemVeiculo))
+                                    .addComponent(lbKm))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         veiculoLayout.setVerticalGroup(
             veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1422,14 +1486,15 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addComponent(txtCor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbKm)
-                    .addComponent(lbPlaca))
+                .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPlaca)
+                    .addComponent(lbKm))
                 .addGap(1, 1, 1)
                 .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbPesq2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1480,7 +1545,8 @@ public class TelaCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
-              
+        
+         
         if (btnInsert == 0) {
             
             inserePessoa();
@@ -1489,13 +1555,12 @@ public class TelaCliente extends javax.swing.JFrame {
             tabelas.setEnabledAt(0, false);
             tabelas.setEnabledAt(1, true);
             btnInsert = 1;
-            
+
         } else if (btnInsert == 1) {
             insereEndereco();
-           
+
         } else {
-           
-            insereVeiculo();
+            insereNewVeiculo();
 
             btnInsert = 0;
             limpar();
@@ -1505,7 +1570,8 @@ public class TelaCliente extends javax.swing.JFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
-
+         btnAddVeiculo.setEnabled(false);
+         btnRemVeiculo.setEnabled(false);
         try {
             ativarTodosCampos();
             id();
@@ -1594,7 +1660,7 @@ public class TelaCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(txtComplemento, "Preencha todos os campos!!!");
         } else {
             try {
-                insereVeiculo();
+                insereMaisVeiculo();
                 tabela();
                 limpar();
                 tabelas.setEnabledAt(0, true);
@@ -1631,12 +1697,12 @@ public class TelaCliente extends javax.swing.JFrame {
         if (resposta == JOptionPane.YES_OPTION) {
             int id = Integer.parseInt(txtId.getText());
             ControllerCliente controlerCliente = new ControllerCliente();
-            ControllerEndereco controllerEndereco = new ControllerEndereco();
             Cliente cli = new Cliente();
             
             try {
                 cli = this.inserir();
-               
+                controlerCliente.deletarCliente(cli);
+                tabela();
                 limpar();
                 tabelas.setEnabledAt(0, true);
                 tabelas.setEnabledAt(1, false);
@@ -1656,8 +1722,8 @@ public class TelaCliente extends javax.swing.JFrame {
 
         try {
             editar();
-            //tabela();
-            limpaTabela();
+         //   tabela();
+           limpaTabela();
         } catch (Exception ex) {
             Logger.getLogger(TelaCliente.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -1703,6 +1769,10 @@ public class TelaCliente extends javax.swing.JFrame {
         txtPlaca.setText(null);
     }//GEN-LAST:event_cbModeloItemStateChanged
 
+    private void btnRemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemVeiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRemVeiculoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1745,6 +1815,7 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JToggleButton btnPesq;
     private javax.swing.JToggleButton btnPesqVeiculo;
+    private javax.swing.JButton btnRemVeiculo;
     private javax.swing.JButton btnRemover;
     private javax.swing.JTextField cbAno;
     private javax.swing.JComboBox cbEstado;

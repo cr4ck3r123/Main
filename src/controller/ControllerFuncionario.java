@@ -58,7 +58,7 @@ public class ControllerFuncionario {
     public  void listarFuncionario() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8090/WebService/rest/funcionario/listar";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/listaFuncionario";
 			String json = http.sendGet(chamada);
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                         
