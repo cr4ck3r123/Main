@@ -49,10 +49,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
         int row = tblFuncionario.getSelectedRow();
         int id = Integer.parseInt(tblFuncionario.getValueAt(row, 0).toString());
         SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
-
+        System.out.print(id);
+       
         Funcionario fun = new Funcionario();
         ControllerFuncionario controlFun = new ControllerFuncionario();
-        fun = controlFun.dadosId(id);
+        fun = controlFun.dadosFunId(id);
         txtId.setText("" + id);
         txtNome.setText(fun.getNome());
         txtDatNasc.setText(fmt.format(fun.getDatanascimento()));
@@ -65,7 +66,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tblFuncionario.setEnabled(true);
         txtPesq.setEnabled(false);
         btnPesq.setEnabled(false);
-
+        
+/*
         Endereco e = new Endereco();
         ControllerEndereco controllerEndereco = new ControllerEndereco();
         e = controllerEndereco.dadosId(id);
@@ -79,21 +81,22 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtCidade.setText(e.getLocalidade());
         cbEstado.setSelectedItem(e.getUf());
         controllerEndereco.listarEndereco(id);
-      
+      */
     }
 
 
 
-    //SETAR ID 
+ /*   //SETAR ID 
     public void id() {
         ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
         try {
-            String id = controllerFuncionario.retornoid();
+            String id = controllerFuncionario.;
             txtId.setText(id);
         } catch (Exception ex) {
             Logger.getLogger(TelaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    */
 
     public void idEndereco() throws Exception {
 
