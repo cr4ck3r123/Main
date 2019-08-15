@@ -1029,7 +1029,7 @@ public class TelaCliente extends javax.swing.JFrame {
                                         .addGap(334, 334, 334)
                                         .addComponent(lbDataNasc))
                                     .addComponent(txtEmail))
-                                .addGap(0, 45, Short.MAX_VALUE))))
+                                .addGap(0, 78, Short.MAX_VALUE))))
                     .addGroup(clienteLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1043,7 +1043,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addGroup(clienteLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                             .addGroup(clienteLayout.createSequentialGroup()
                                 .addGroup(clienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(clienteLayout.createSequentialGroup()
@@ -1220,7 +1220,7 @@ public class TelaCliente extends javax.swing.JFrame {
                                     .addGroup(enderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbCep)
                                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 80, Short.MAX_VALUE)))
+                        .addGap(0, 71, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         enderecoLayout.setVerticalGroup(
@@ -1411,7 +1411,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(veiculoLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4)
                         .addGap(11, 11, 11))
                     .addGroup(veiculoLayout.createSequentialGroup()
                         .addGroup(veiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1523,7 +1523,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(tabelas)
+            .addComponent(tabelas, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

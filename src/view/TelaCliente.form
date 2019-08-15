@@ -67,7 +67,7 @@
               <Component id="btnNovo" min="-2" pref="107" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Component id="tabelas" alignment="0" max="32767" attributes="0"/>
+          <Component id="tabelas" alignment="0" pref="548" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -263,7 +263,7 @@
                                           </Group>
                                           <Component id="txtEmail" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -283,7 +283,7 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" alignment="0" pref="529" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="519" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
@@ -610,7 +610,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="71" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -863,7 +863,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane4" pref="530" max="32767" attributes="0"/>
+                              <Component id="jScrollPane4" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">

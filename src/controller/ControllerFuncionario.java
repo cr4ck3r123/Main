@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -39,8 +40,33 @@ public class ControllerFuncionario {
 
     }
 
-    public Funcionario dadosId(int id) {
-        return null;
+        //METODO PEGAR ULTIMO ID
+    public int retornoid() throws Exception {
+
+        String chamada = "https://app-api-restfull.herokuapp.com/api/listaFuncionario";
+        HttpExemplo http = new HttpExemplo();
+        String json = http.sendGet(chamada);
+        java.lang.reflect.Type usuarioType = new TypeToken<List<Funcionario>>() {
+        }.getType();
+        // System.out.print(json);
+
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        List<Funcionario> listaFuncionario = gson.fromJson(json, usuarioType);
+
+        ArrayList<Integer> meuArrayList = new ArrayList<Integer>();
+        int x = 0;
+        
+        for (Funcionario funcionarioRetorno : listaFuncionario) {
+
+            int id = funcionarioRetorno.getIdfuncionario();
+            
+            if (x < id) {
+                x = id;
+            }
+
+        }
+        System.out.print("Ultimo id" + x+"\n");
+        return x;
     }
 
     //METODO PEGAR ID FUNCIONARIO

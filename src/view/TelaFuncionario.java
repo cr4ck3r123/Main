@@ -44,7 +44,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tabelas.setEnabledAt(0, true);
         tabelas.setEnabledAt(1, true);
         
-
         ativarTodosCampos();
         int row = tblFuncionario.getSelectedRow();
         int id = Integer.parseInt(tblFuncionario.getValueAt(row, 0).toString());
@@ -63,11 +62,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtCelular.setText(fun.getCelular());
         txtEmail.setText(fun.getEmail());
         txtFuncao.setText(fun.getFuncao());
-        tblFuncionario.setEnabled(true);
         txtPesq.setEnabled(false);
         btnPesq.setEnabled(false);
-        
-/*
+        tblFuncionario.setEnabled(true);
+
         Endereco e = new Endereco();
         ControllerEndereco controllerEndereco = new ControllerEndereco();
         e = controllerEndereco.dadosId(id);
@@ -80,8 +78,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtBairro.setText(e.getBairro());
         txtCidade.setText(e.getLocalidade());
         cbEstado.setSelectedItem(e.getUf());
-        controllerEndereco.listarEndereco(id);
-      */
+       // controllerEndereco.listarEndereco(id);
+      
     }
 
 
@@ -98,13 +96,15 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }
     */
 
-    public void idEndereco() throws Exception {
-
-        ControllerEndereco controllerEndereco = new ControllerEndereco();
-        String id = controllerEndereco.retornoid();
-        idEnd.setText(id);
+  //SETAR ID 
+    public int id() throws Exception {
+        ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
+        int id = controllerFuncionario.retornoid();
+            
+            txtId.setText(String.valueOf(id+1));       
+            
+        return id;
     }
-
     //ATIVA TODOS OS CAMPOS
     void ativarTodosCampos() {
 
@@ -204,7 +204,10 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtCpf.setText(null);
         lbPesq.setEnabled(true);
         txtPesq.setEnabled(true);
-
+        txtFuncao.setText(null);
+        txtFuncao.setEnabled(false);
+        tblFuncionario.setEnabled(true);
+        
         //LIMPA DADOS ENDEREÇO
         txtRua.setText(null);
         txtNum.setText(null);
@@ -212,11 +215,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtCepFun.setText(null);
         txtBairro.setText(null);
         txtCidade.setText(null);
-        txtFuncao.setText(null);
-
-      
-        tblFuncionario.setEnabled(true);
-
+        
         btnInserir.setEnabled(false);
         btnEditar.setEnabled(false);
         btnPesq.setEnabled(true);
@@ -225,7 +224,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tabelas.setEnabledAt(0, false);
         tabelas.setEnabledAt(1, false);
         tabelas.setSelectedIndex(0);
-
+        
     }
 
     //DESABILITA ENDEREÇO
@@ -328,12 +327,12 @@ public class TelaFuncionario extends javax.swing.JFrame {
     }
 
     //METODO INSERIR ENDERECO JSON
-    public Endereco inserirEndereco() {
+    public Endereco inserirEndereco() throws Exception {
 
         Endereco endereco = new Endereco();
-        int id = Integer.parseInt(idEnd.getText());
-        int num = Integer.parseInt(txtId.getText());
-        endereco.setId(id);
+      //  int id = Integer.parseInt(idEnd.getText());
+      //  int num = Integer.parseInt(txtId.getText());
+    //    endereco.setId(id);
         endereco.setLogradouro(txtRua.getText().toUpperCase());
         endereco.setNumero(Integer.parseInt(txtNum.getText()));
         endereco.setComplemento(txtComplemento.getText().toUpperCase());
@@ -341,7 +340,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
         endereco.setBairro(txtBairro.getText().toUpperCase());
         endereco.setLocalidade(txtCidade.getText().toUpperCase());
         endereco.setUf(cbEstado.getSelectedItem().toString().toUpperCase());
-        endereco.setPessoa_idpessoa(num);
+        int idFuncionario = id();
+        endereco.setPessoa_idpessoa(idFuncionario);
         return endereco;
     }
 
@@ -388,7 +388,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 try {
                     controllerEndereco.inserirEndereco(endereco);
                     JOptionPane.showMessageDialog(rootPane, "Endereço inserido com sucesso!!!");
-                    limpaEndereco();
                     limpar();
                    
 
@@ -399,11 +398,11 @@ public class TelaFuncionario extends javax.swing.JFrame {
                 Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
             btnInsert = 2;
+          
             
             tabelas.setEnabledAt(1, false);
-          //  tabelas.setEnabledAt(2, false);
             tabelas.setSelectedIndex(0);
-           btnInserir.setEnabled(true);
+            btnInserir.setEnabled(true);
             btnNovo.setEnabled(false);
         }
         return btnInsert;
@@ -1060,8 +1059,14 @@ public class TelaFuncionario extends javax.swing.JFrame {
 
         } else if (btnInsert == 1) {
             insereEndereco();
-            
+            ControllerFuncionario ctrl = new ControllerFuncionario();
+            try {
+                ctrl.listarFuncionario();
+            } catch (Exception ex) {
+                Logger.getLogger(TelaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } 
+        
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -1086,6 +1091,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         ControllerFuncionario funcionario = new ControllerFuncionario();
 
         try {
+            
             funcionario.listarFuncionario();
 
         } catch (Exception ex) {
