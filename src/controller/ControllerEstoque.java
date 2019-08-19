@@ -23,7 +23,7 @@ public class ControllerEstoque {
     public String inserir(Estoque dados) throws Exception {
 			
 			String msg = "deu";
-			String chamada = "http://localhost:8090/WebService/rest/estoque/adicionar";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/estoque";
 			HttpExemplo http = new HttpExemplo();
 			Gson gson = new Gson();
 						
@@ -53,7 +53,7 @@ public class ControllerEstoque {
     public  void listar() throws Exception{
                     
                         HttpExemplo http = new HttpExemplo();
-			String chamada = "http://localhost:8090/WebService/rest/estoque/listar";
+			String chamada = "https://app-api-restfull.herokuapp.com/api/listaEstoque";
 			String json = http.sendGet(chamada);
 			Gson gson = new Gson();
                         

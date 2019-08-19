@@ -204,6 +204,7 @@ public class TelaFuncionario extends javax.swing.JFrame {
         txtCpf.setText(null);
         lbPesq.setEnabled(true);
         txtPesq.setEnabled(true);
+        lblFuncao.setEnabled(false);
         txtFuncao.setText(null);
         txtFuncao.setEnabled(false);
         tblFuncionario.setEnabled(true);
@@ -257,8 +258,8 @@ public class TelaFuncionario extends javax.swing.JFrame {
     void tabela() throws Exception {
         ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
         controllerFuncionario.listarFuncionario();
-        ControllerEndereco controllerEndereco = new ControllerEndereco();
-        controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));    
+     //   ControllerEndereco controllerEndereco = new ControllerEndereco();
+     //   controllerEndereco.listarEndereco(Integer.parseInt(txtId.getText()));    
 
     }
 
@@ -1137,7 +1138,6 @@ public class TelaFuncionario extends javax.swing.JFrame {
         limpar();
         tabelas.setEnabledAt(0, true);
         tabelas.setEnabledAt(1, false);
-        tabelas.setEnabledAt(2, false);
         btnInserir.setEnabled(false);
         btnEditar.setEnabled(false);
         btnRemover.setEnabled(false);

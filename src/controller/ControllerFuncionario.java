@@ -116,8 +116,24 @@ public class ControllerFuncionario {
 
     }
 
-    public void editar(Funcionario funcionario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //EDITAR FUNCIONARIO
+    public String editar(Funcionario dados) throws Exception {
+
+        String msg = "deu";
+        String chamada = "https://app-api-restfull.herokuapp.com/api/funcionario";
+        HttpExemplo http = new HttpExemplo();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
+        java.lang.reflect.Type usuarioType = new TypeToken<Funcionario>() {
+        }.getType();
+
+        String json = gson.toJson(dados, usuarioType);
+
+        http.PUT(chamada, json);
+
+        return msg;
+
     }
+    
 
 }
